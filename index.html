@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070d1c">
+<title>مراجعة أكتوبر — MZ TECHNOLOGY</title>
+<style>
+:root{
+  --bg:#070d1c; --bg2:#0b1530; --card:#0f1c3b; --card2:#13244a;
+  --line:rgba(86,160,255,.28); --blue:#2f7bff; --cyan:#27d7ff; --white:#f4f8ff; --mut:#9db4d8;
+  --amber:#ffb84d; --green:#37d99a; --red:#ff6075; --violet:#9b8cff;
+  --font:"Segoe UI","Tahoma","Noto Sans Arabic","Cairo","Arial","DejaVu Sans",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:#070d1c;overflow:hidden;overscroll-behavior:none;font-family:var(--font);color:var(--white);-webkit-text-size-adjust:100%;text-size-adjust:100%}
+#stage{position:fixed;left:0;top:0;transform-origin:0 0;overflow:hidden;
+  background:radial-gradient(500px 300px at 90% -5%,rgba(47,123,255,.22),transparent 60%),
+             radial-gradient(400px 300px at 0% 105%,rgba(39,215,255,.14),transparent 60%),
+             linear-gradient(180deg,var(--bg2),var(--bg))}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.en{direction:ltr;unicode-bidi:isolate;display:inline-block;color:var(--cyan);font-weight:600;font-size:.82em}
+.num{font-family:Consolas,"Courier New","DejaVu Sans Mono",monospace;letter-spacing:.03em}
+sub{font-size:.6em}
+b,.hl{color:var(--cyan);font-weight:700}
+.warn{color:var(--amber);font-weight:700}.ok{color:var(--green);font-weight:700}.bad{color:var(--red);font-weight:700}
+.mut{color:var(--mut)}
+
+/* top bar */
+#top{position:absolute;top:0;left:0;right:0;height:44px;padding:0 12px;display:flex;align-items:center;justify-content:space-between;z-index:5}
+#brand{display:flex;align-items:center;gap:8px;direction:ltr;font-weight:800;letter-spacing:.1em;font-size:13px;color:var(--white)}
+#brand svg{width:28px;height:28px}
+#brand small{display:none}
+.chip{padding:4px 12px;border-radius:999px;border:1px solid rgba(39,215,255,.45);background:rgba(15,28,59,.7);font-size:13px;color:var(--cyan);white-space:nowrap}
+
+/* slides */
+#slides{position:absolute;top:44px;bottom:66px;left:0;right:0}
+.slide{position:absolute;inset:0;padding:4px 14px 18px;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;
+  opacity:0;pointer-events:none;transform:translateX(-22px);transition:opacity .3s ease,transform .3s ease}
+.slide.on{opacity:1;pointer-events:auto;transform:none}
+.slide.back{transform:translateX(22px)}
+.tag{font-size:14px;color:var(--cyan);font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px;line-height:1.4}
+.tag i{flex:none;display:inline-block;width:24px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+h1{font-size:26px;line-height:1.35;font-weight:800;margin-bottom:10px}
+.body{flex:1 0 auto;display:flex;flex-direction:column;justify-content:center;gap:12px;font-size:19px;line-height:1.6}
+.lead{font-size:19px;line-height:1.65;color:#dbe8ff}
+.grid{display:grid;gap:10px;grid-template-columns:1fr}
+.card{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:16px;padding:12px 16px;position:relative;overflow:hidden}
+.card::after{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--blue),var(--cyan));opacity:.9}
+.card.amber::after{background:var(--amber)}.card.green::after{background:var(--green)}.card.red::after{background:var(--red)}.card.violet::after{background:var(--violet)}
+.card h3{font-size:21px;font-weight:800;margin-bottom:4px;line-height:1.35}
+.card h3:empty{display:none}
+.card p,.card li{font-size:18px;line-height:1.55;color:#dbe8ff}
+.card ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+.card .eg{margin-top:6px;font-size:16px;color:var(--mut);line-height:1.5}
+.card .eg b{color:var(--amber)}
+.flow{display:flex;flex-direction:column;align-items:stretch;gap:0}
+.arrow{align-self:center;font-size:26px;color:var(--cyan);padding:2px 0;transform:rotate(-90deg)}
+.arrow.x{transform:none;font-size:17px;font-weight:800}
+table.t{width:100%;border-collapse:separate;border-spacing:0 8px;font-size:16px}
+table.t th{padding:6px 10px;color:var(--cyan);font-size:14px;text-align:start;font-weight:700}
+table.t td{padding:8px 10px;background:var(--card);border-block:1px solid var(--line);line-height:1.5;vertical-align:top}
+table.t td:first-child{border-start-start-radius:12px;border-end-start-radius:12px;border-inline-start:1px solid var(--line);font-weight:800;color:var(--white)}
+table.t td:last-child{border-start-end-radius:12px;border-end-end-radius:12px;border-inline-end:1px solid var(--line)}
+.callout{border-radius:14px;padding:10px 14px;border:1px solid rgba(255,184,77,.5);background:rgba(255,184,77,.09);font-size:17px;line-height:1.55}
+.callout.blue{border-color:rgba(39,215,255,.45);background:rgba(39,215,255,.08)}
+.callout.green{border-color:rgba(55,217,154,.5);background:rgba(55,217,154,.09)}
+.row{display:flex;flex-direction:column;gap:10px;align-items:stretch}
+.row>div{flex:none!important}
+.big{font-size:54px;font-weight:800;line-height:1.1}
+.center{align-items:center;justify-content:center;text-align:center}
+
+/* hero */
+.hero{align-items:center;justify-content:center;text-align:center;gap:8px}
+.hero .mark{width:90px!important;height:90px!important;margin-bottom:6px;filter:drop-shadow(0 0 20px rgba(39,215,255,.5))}
+.hero .brand{font-size:16px;letter-spacing:.3em;color:var(--cyan);font-weight:800;direction:ltr}
+.hero h1{font-size:34px;margin:4px 0;background:linear-gradient(90deg,#fff,#9fd6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-size:19px;color:#cfe1ff;line-height:1.6}
+.hero .by{margin-top:14px;font-size:14px;color:var(--mut);letter-spacing:.15em;direction:ltr}
+.hero .by b{color:var(--white);letter-spacing:.15em}
+.timeline{display:flex;flex-wrap:wrap;border-radius:14px;overflow:hidden;border:1px solid var(--line);direction:rtl}
+.timeline div{flex:1 1 33%!important;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:14px;line-height:1.3;text-align:center;padding:8px 4px;color:#fff}
+.timeline div b{font-size:16px;color:#fff}
+.t1{background:#1c3f87}.t2{background:#1b5aa8}.t3{background:#1778b8}.t4{background:#12908f}.t5{background:#c9871f}.t6{background:#6a56d6}
+
+/* quiz */
+.qtext{font-size:23px;line-height:1.6;font-weight:700}
+.qmeta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--mut)}
+.badge{padding:2px 12px;border-radius:999px;font-size:13px;font-weight:700;border:1px solid}
+.b-easy{color:var(--green);border-color:rgba(55,217,154,.5)}.b-mid{color:var(--amber);border-color:rgba(255,184,77,.5)}.b-hard{color:var(--red);border-color:rgba(255,96,117,.5)}
+.opts{display:grid;grid-template-columns:1fr;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;text-align:start;font:inherit;color:var(--white);cursor:pointer;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:10px 14px;font-size:19px;line-height:1.45;min-height:56px;width:100%}
+.opt .k{flex:none;width:36px;height:36px;border-radius:10px;background:rgba(47,123,255,.25);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--cyan);font-size:18px}
+.opt.right{border-color:var(--green);background:rgba(55,217,154,.16)}.opt.right .k{background:var(--green);color:#04281a}
+.opt.wrong{border-color:var(--red);background:rgba(255,96,117,.14)}.opt.wrong .k{background:var(--red);color:#2b020a}
+.opt.dim{opacity:.55}
+.calc{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.calc input{font:inherit;font-size:22px;flex:1 1 140px;min-width:0;padding:8px 14px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--white);direction:ltr;text-align:center}
+.calc input:focus{outline:none;border-color:var(--cyan)}
+.btn{font:inherit;cursor:pointer;color:var(--white);background:linear-gradient(135deg,var(--blue),#1d5fe0);border:0;border-radius:14px;padding:10px 20px;font-size:18px;font-weight:700;min-height:48px}
+.btn.ghost{background:transparent;border:2px solid var(--line);color:var(--cyan)}
+.expl{border-radius:16px;padding:12px 16px;background:rgba(55,217,154,.08);border:1px solid rgba(55,217,154,.45);font-size:17px;line-height:1.55;display:none}
+.expl.show{display:block;animation:pop .3s ease}
+.expl .ans{font-size:18px;font-weight:800;color:var(--green);margin-bottom:4px}
+.expl .mk{color:var(--amber);margin-top:6px;font-size:15px}
+.expl .ls{color:var(--mut);margin-top:6px;font-size:14px}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.slide.on .body>*{animation:rise .4s ease both}
+.slide.on .body>*:nth-child(2){animation-delay:.05s}.slide.on .body>*:nth-child(3){animation-delay:.1s}.slide.on .body>*:nth-child(4){animation-delay:.15s}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.revbtn{align-self:flex-start}
+
+/* rapid */
+.rh{font-size:21px!important;margin-bottom:6px}
+.rapid{display:flex;flex-direction:column;gap:8px}
+.rp{display:flex;align-items:center;gap:10px;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:10px 12px;font-size:17px;cursor:pointer;line-height:1.5}
+.rp .res{flex:none;width:78px;font-size:14px;font-weight:800;text-align:center;border-radius:10px;padding:5px 4px;border:1px dashed var(--line);color:var(--mut)}
+.rp .why{display:none;font-size:15px;color:var(--mut);margin-top:3px}
+.rp.t .res{background:rgba(55,217,154,.18);color:var(--green);border:1px solid var(--green)}
+.rp.f .res{background:rgba(255,96,117,.15);color:var(--red);border:1px solid var(--red)}
+.rp.open .why{display:block}
+
+/* bits & ascii & hex */
+.bits{display:flex;gap:4px;direction:ltr;justify-content:center}
+.bit{flex:1 1 0;max-width:54px;text-align:center;cursor:pointer;user-select:none}
+.bit .w{font-size:13px;color:var(--mut)}
+.bit .v{margin-top:3px;height:54px;border-radius:12px;border:2px solid var(--line);background:var(--card);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;font-family:Consolas,"Courier New","DejaVu Sans Mono",monospace}
+.bit.on .v{background:linear-gradient(160deg,var(--blue),var(--cyan));color:#02122b;border-color:var(--cyan);box-shadow:0 0 16px rgba(39,215,255,.45)}
+.ascii{border-collapse:collapse;direction:ltr;font-size:15px;font-family:Consolas,"Courier New","DejaVu Sans Mono",monospace;margin:0 auto}
+.ascii th,.ascii td{border:1px solid var(--line);padding:2px 6px;text-align:center;min-width:38px}
+.ascii th{background:var(--card2);color:var(--cyan)}
+.ascii td.hi{background:var(--amber);color:#2b1a00;font-weight:800}
+.hexg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;direction:ltr}
+.hexg div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 2px;text-align:center;font-family:Consolas,"Courier New","DejaVu Sans Mono",monospace;font-size:14px}
+.hexg div b{display:block;font-size:22px;color:var(--amber)}
+.hexg div span{display:block;color:var(--mut);font-size:13px}
+.pyr{display:flex;flex-direction:column;align-items:center;gap:8px}
+.pyr div{padding:10px 14px;border-radius:12px;text-align:center;font-weight:800;font-size:17px;color:#fff}
+.pyr div span{font-size:14px!important;font-weight:500}
+.pyr div:nth-child(1){width:78%!important}.pyr div:nth-child(2){width:89%!important}.pyr div:nth-child(3){width:100%!important}
+.step{display:flex;gap:12px;align-items:flex-start}
+.reveal-hint{font-size:14px;color:var(--mut)}
+
+/* bottom bar */
+#bar{position:absolute;bottom:0;left:0;right:0;padding:8px 10px calc(8px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:stretch;background:rgba(7,13,28,.97);border-top:1px solid var(--line);z-index:5}
+#prog{position:absolute;top:-1px;left:0;right:0;height:3px;background:rgba(255,255,255,.08);direction:rtl}
+#prog i{display:block;height:100%;width:0;background:linear-gradient(270deg,var(--blue),var(--cyan));transition:width .3s}
+.nb{flex:1;font:inherit;font-size:19px;font-weight:800;min-height:50px;border-radius:14px;border:0;color:#fff;background:linear-gradient(135deg,var(--blue),#1d5fe0);cursor:pointer}
+.nb.ghost{background:rgba(15,28,59,.9);border:1px solid var(--line);color:var(--cyan)}
+.nb:disabled{opacity:.35}
+#bOv{flex:0 0 96px;font:inherit;color:var(--white);background:rgba(15,28,59,.9);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.25;cursor:pointer}
+#count{font-size:16px;direction:ltr;font-variant-numeric:tabular-nums;color:var(--white);font-weight:800}
+#bOv small{font-size:12px;color:var(--cyan)}
+
+/* overlay */
+#overlay{position:absolute;inset:0;background:rgba(3,6,15,.98);z-index:30;display:none;padding:14px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+#overlay.on{display:block}
+#overlay h2{font-size:21px;margin-bottom:8px}
+.ov-sec{color:var(--cyan);font-size:17px;font-weight:800;margin:14px 0 6px}
+.ov-grid{display:grid;grid-template-columns:1fr;gap:6px}
+.ov-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:16px;line-height:1.4;cursor:pointer;min-height:48px}
+.ov-item.cur{border-color:var(--amber);background:var(--card2)}
+.ov-item span{color:var(--amber);font-weight:800;margin-inline-end:8px}
+#ovx{position:sticky;top:0;float:left;z-index:2}
+
+/* wider (landscape / tablet) */
+#stage:not(.narrow) .g2{grid-template-columns:1fr 1fr}
+#stage:not(.narrow) .g3{grid-template-columns:repeat(3,1fr)}
+#stage:not(.narrow) .g4{grid-template-columns:1fr 1fr}
+#stage:not(.narrow) .g5{grid-template-columns:repeat(3,1fr)}
+#stage:not(.narrow) .flow{flex-direction:row;align-items:stretch}
+#stage:not(.narrow) .flow .card{flex:1}
+#stage:not(.narrow) .arrow{transform:none;align-self:center;padding:0 6px}
+#stage:not(.narrow) .arrow.x{font-size:14px}
+#stage:not(.narrow) .row{flex-direction:row;align-items:center}
+#stage:not(.narrow) .row>div{flex:1!important}
+#stage:not(.narrow) .opts{grid-template-columns:1fr 1fr}
+#stage:not(.narrow) .timeline div{flex:1 1 16%!important}
+#stage:not(.narrow) .hexg{grid-template-columns:repeat(8,1fr)}
+#stage:not(.narrow) .ov-grid{grid-template-columns:repeat(3,1fr)}
+#stage:not(.narrow) .slide{padding-inline:28px}
+#stage:not(.narrow) #brand small{display:block}
+
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="top"><div id="chips"></div><div id="brand"><svg viewBox="0 0 100 100"><defs><linearGradient id="gb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f7bff"/><stop offset="1" stop-color="#27d7ff"/></linearGradient></defs><polygon points="50,4 91,27 91,73 50,96 9,73 9,27" fill="#0b1530" stroke="url(#gb)" stroke-width="5"/><text x="50" y="60" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="30" fill="url(#gb)">MZ</text></svg><div>MZ TECHNOLOGY</div></div></div>
+  <div id="slides"></div>
+  <div id="bar">
+    <div id="prog"><i></i></div>
+    <button class="nb" id="bPrev">▶ السابق</button>
+    <button id="bOv"><span id="count"></span><small>فهرس ☰</small></button>
+    <button class="nb" id="bNext">التالي ◀</button>
+  </div>
+  <div id="overlay"></div>
+</div>
+<script>
+/* ====== helpers ====== */
+const B=(x,b=2)=>`<span class="ltr num">${x}<sub>${b}</sub></span>`;
+const N=(x)=>`<span class="ltr num">${x}</span>`;
+const E=(x)=>`<span class="en">${x}</span>`;
+const card=(h,p,o={})=>`<div class="card ${o.c||''}"><h3>${h}</h3>${p?`<p>${p}</p>`:''}${o.eg?`<div class="eg">${o.eg}</div>`:''}</div>`;
+const ul=(a)=>`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+const grid=(n,items,cls='')=>`<div class="grid g${n} ${cls}">${items.join('')}</div>`;
+const callout=(t,c='')=>`<div class="callout ${c}">${t}</div>`;
+const tbl=(head,rows)=>`<table class="t"><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table>`;
+const MARK=`<svg class="mark" viewBox="0 0 100 100"><defs><linearGradient id="gm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f7bff"/><stop offset="1" stop-color="#27d7ff"/></linearGradient></defs><polygon points="50,4 91,27 91,73 50,96 9,73 9,27" fill="#0b1530" stroke="url(#gm)" stroke-width="4"/><text x="50" y="59" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="30" fill="url(#gm)" letter-spacing="1">MZ</text></svg>`;
+
+const SEC={
+ open:{n:'الافتتاحية',m:'0 – 4'},found:{n:'التأسيس',m:'4 – 9'},teach:{n:'شرح ومراجعة المنهج',m:'9 – 39'},
+ bank:{n:'ملحق: نماذج الامتحان الاسترشادية',m:'إضافي'},
+ prac:{n:'تدريب على الأسئلة',m:'39 – 50'},chal:{n:'تحدي التفكير',m:'50 – 57'},close:{n:'الخاتمة',m:'57 – 60'}};
+const S=[];
+const add=(o)=>S.push(o);
+const L=(u,l)=>`الوحدة ${u} – الدرس ${l}`;
+const Q=(o)=>add(Object.assign({type:'q'},o));
+
+/* ====== 0–4 الافتتاحية ====== */
+add({sec:'open',min:'0 – 1',type:'hero',title:'مراجعة شهر أكتوبر',html:`
+ ${MARK}<div class="brand">MZ TECHNOLOGY</div>
+ <h1>مراجعة شهر أكتوبر الاحترافية</h1>
+ <div class="sub">البرمجة — الصف الأول الثانوي</div>
+ <div class="by">BY <b>MR. MAZEN MOHAMED</b></div>`,
+ note:'رحّب بالطلاب. قولهم: الحصة 60 دقيقة، هنغطي المنهج كله وبعدها تدريب وتحدي. اطمّنهم إن اللي أول مرة يدرس البرمجة هنبدأ معاه من الأساسيات.'});
+
+add({sec:'open',min:'1 – 3',tag:'خريطة الحصة',title:'هنعمل إيه في الـ 60 دقيقة؟',cls:'sm',html:`
+ <div class="timeline">
+  <div class="t1" style="flex:4"><b>4</b>افتتاحية</div><div class="t2" style="flex:5"><b>5</b>تأسيس</div>
+  <div class="t3" style="flex:30"><b>30 دقيقة</b>شرح ومراجعة المنهج</div><div class="t4" style="flex:11"><b>11</b>تدريب</div>
+  <div class="t5" style="flex:7"><b>7</b>تحدي</div><div class="t6" style="flex:3"><b>3</b>ختام</div></div>
+ ${grid(4,[
+  card('الوحدة 1','المعلومات والوسائط<br>أخلاقيات المعلومات',{eg:'الدرسان 1 و 2'}),
+  card('الوحدة 2','البيانات الشخصية<br>الملكية الفكرية<br>الاستخدام والاقتباس',{eg:'الدروس 1 – 3'}),
+  card('الوحدة 3','تهديدات أمن المعلومات<br>كلمات المرور والمصادقة<br>الاحتيال وسياسة الأمن',{eg:'الدروس 1 – 3'}),
+  card('الوحدة 6','النظام الثنائي وكمية البيانات<br>السادس عشر · الأحرف · الجمع والطرح',{eg:'الدروس 2 – 5'})])}
+ ${callout('<b>مش داخل في امتحان الشهر:</b> الوحدة 3 (درس 4 و 5) · الوحدتان 4 و 5 · الوحدة 6 (درس 1، وبعد درس 5) · الوحدة 7','')}`,
+ note:'وضّح للطلاب إن المحذوف مش هنتعرض له. اللي جاي من مدرسين تانيين يطمّن إن المنهج المقرر كله موجود.'});
+
+Q({sec:'open',min:'3 – 4',tag:'سؤال الافتتاح',level:'easy',
+ q:'وصلتك رسالة SMS: «مبروك! كسبت جايزة. ادخل على الرابط وسجّل رقم بطاقتك والـ PIN عشان تستلمها». هتعمل إيه؟',
+ opts:['أدخل بياناتي بسرعة قبل ما العرض يخلص','أتجاهلها ومدخلش أي بيانات، وأبلّغ عنها','أبعتها لأصحابي يستفيدوا معايا','أرد عليهم وأطلب تأكيد الجايزة'],ans:1,
+ why:'دي محاولة احتيال بتتنكر في شكل جهة موثوقة عشان تسرق بياناتك — اسمها <b>تصيّد (Phishing)</b>. هنشرحها في الوحدة 3.',
+ mistake:'الحماس للجايزة بيخلّي الناس تدخّل بياناتها قبل ما تفكر.',lesson:L(3,3),
+ note:'سؤال تحفيزي. خلّي 2–3 طلاب يجاوبوا قبل ما تظهر الإجابة. هنرجع له في الوحدة 3 وفي الختام.'});
+
+/* ====== 4–9 التأسيس ====== */
+add({sec:'found',min:'4 – 5',tag:'تأسيس',title:'المنهج كله بيجاوب على 4 أسئلة',html:`
+ ${grid(2,[
+  card('الوحدة 1','إيه هي المعلومات؟ وإزاي أتعامل معاها بأخلاق على النت؟'),
+  card('الوحدة 2','إيه حقوقي أنا وحقوق غيري؟ (بيانات شخصية · ملكية فكرية · اقتباس)',{c:'green'}),
+  card('الوحدة 3','إزاي أحمي معلوماتي من الاختراق والاحتيال؟',{c:'red'}),
+  card('الوحدة 6','إزاي الكمبيوتر بيحوّل كل حاجة لأرقام (0 و 1)؟',{c:'violet'})],'')}
+ ${callout('لو فهمت السؤال الكبير بتاع كل وحدة، هتفتكر التفاصيل أسهل بكتير.','blue')}`,
+ note:'اربط الوحدات الأربعة بسؤال واحد بسيط لكل وحدة. ده بيدّي الطالب المبتدئ خريطة ذهنية.'});
+
+add({sec:'found',min:'5 – 6',tag:'تأسيس',title:'أول مصطلحين: بيانات و معلومات',html:`
+ <div class="flow">
+  ${card(`البيانات ${E('Data')}`,'حقائق خام: أرقام أو أحرف أو رموز.',{eg:'مثال: <b>38</b>'})}
+  <div class="arrow">◀</div>
+  ${card(`المعلومات ${E('Information')}`,'بيانات ليها معنى بنستخدمه في اتخاذ قرار.',{c:'green',eg:'مثال: <b>درجة حرارتك 38 = عندك سخونية</b>'})}
+ </div>
+ ${callout('«38» لوحدها مالهاش معنى. لما عرفنا إنها <b>درجة حرارة جسم</b> بقت معلومة.','blue')}`,
+ note:'اسأل الطلاب: الرقم 38 لوحده يقولك إيه؟ ولما أقولك درجة حرارة مريض؟'});
+
+add({sec:'found',min:'6 – 7',tag:'تأسيس',title:'الكمبيوتر بيفهم إيه؟',html:`
+ <div class="row" style="align-items:center">
+  <div class="card center" style="flex:1"><div class="big hl num">0</div><p>مطفي / لأ</p></div>
+  <div class="card center green" style="flex:1"><div class="big ok num">1</div><p>شغّال / أيوه</p></div>
+  <div style="flex:2" class="lead">كل حاجة جوه الكمبيوتر: أرقام، حروف، صور، صوت… بتتحوّل لخليط من <b>0</b> و <b>1</b> بس.<br>الواحد منهم اسمه <b>${E('bit')}</b>.</div>
+ </div>
+ ${callout('هنتعلم في الوحدة 6 إزاي بنحسب بيهم ونحوّل بينهم وبين الأرقام العادية.','blue')}`,
+ note:'مجرد تمهيد لفكرة الـ bit قبل الوحدة 6. متدخلش في تفاصيل.'});
+
+add({sec:'found',min:'7 – 8',tag:'تأسيس',title:'4 قواعد ذهبية لحل أسئلة الامتحان',cls:'sm',html:`
+ ${grid(2,[
+  card('1. الكلمة المفتاحية','«بدون إذن»، «50 سنة»، «التحقق المتبادل»… دي بتدلّك على الإجابة.'),
+  card('2. استبعد الغلط','شيل الإجابات اللي واضح إنها غلط الأول، وهتلاقي الصح أقرب.',{c:'green'}),
+  card('3. الحسابات خطوة خطوة','في الثنائي والسادس عشر اكتب خطواتك، ومتحسبش في دماغك.',{c:'amber'}),
+  card('4. اللي بيتلخبط','بنفرّق بين الأولية/الثانوية، الدودة/الحصان، الموافقة/الاعتراض… هنركز عليهم.',{c:'red'})])}`,
+ note:'قواعد سريعة. شجّع الطلاب يكتبوا الكلمات المفتاحية.'});
+
+Q({sec:'found',min:'8 – 9',tag:'سؤال تأسيس',level:'easy',
+ q:'أي جملة من دول تُعتبر (معلومات) وليست مجرد (بيانات)؟',
+ opts:['«38»','«حرارتك 38 درجة، يعني عندك سخونية وتروح للدكتور»','«محمد»','«2026»'],ans:1,
+ why:'المعلومات بيانات ليها معنى بيساعدنا نتخذ قرار. باقي الاختيارات حقائق خام بدون سياق.',
+ mistake:'اعتبار أي رقم أو اسم معلومة، مع إنه بيان خام لحد ما يتحط في سياق.',lesson:L(1,1),
+ note:'لو الطلاب جاوبوا صح بسرعة، كمّل. لو مش واضح، ارجع لمثال 38.'});
+
+/* ====== 9–39 شرح المنهج ====== */
+/* U1 L1 — 9–12 */
+const U1L1='الوحدة 1 · الدرس 1 — المعلومات والوسائط';
+add({sec:'teach',min:'9 – 12',tag:U1L1,title:'بيانات ← معلومات ← معرفة',html:`
+ <div class="flow">
+  ${card(`البيانات ${E('Data')}`,'حقائق بأرقام أو أحرف أو رموز.',{eg:'<b>38</b>'})}<div class="arrow">◀</div>
+  ${card(`المعلومات ${E('Information')}`,'معنى أو قيمة للمتلقي، بتتستخدم لاتخاذ القرار. <b>مالهاش شكل مادي</b> (مش حاجة تتلمس).',{c:'green',eg:'<b>38 = سخونية</b>'})}<div class="arrow">◀</div>
+  ${card(`المعرفة ${E('Knowledge')}`,'معلومات اتحللت واتنظّمت <b>بشكل منهجي</b> عشان تساعد في حل المشكلات.',{c:'violet',eg:'<b>تحليل حالات كتير = نعرف نعالج</b>'})}
+ </div>
+ ${callout('عكس الأشياء المادية (كتاب، كرسي)، المعلومات مالهاش شكل أو كيان ثابت.','blue')}`,
+ note:'ركّز: المعلومات ليها قيمة ومعنى للمتلقي، والمعرفة تحليل وتنظيم منهجي لحل المشكلات.'});
+
+add({sec:'teach',min:'9 – 12',tag:U1L1,title:'3 خصائص للمعلومات',html:`
+ ${grid(3,[
+  card(`الاستمرارية ${E('Persistence')}`,'بمجرد ما المعلومة تتعمل، <b>مينفعش تتمحي بالكامل</b>.',{eg:'صورة اتنشرت وبقى لها نسخ'}),
+  card(`قابلية التكرار ${E('Reproducibility')}`,'ممكن <b>نسخها بكميات كبيرة</b> بسهولة.',{c:'green',eg:'ألف نسخة من فيديو بنفس الجودة'}),
+  card(`الانتشار ${E('Propagation')}`,`بتتوصّل وتتنشر بسهولة عبر <b>وسائل الإعلام الجماهيرية</b> (${E('Mass Media')}) كالصحف والتلفزيون والإنترنت.`,{c:'amber',eg:'خبر وصل لملايين في ساعة'})])}
+ ${callout('<b>الفرق اللي بيتلخبط:</b> التكرار = عمل نسخ كتير · الانتشار = وصول المعلومة لناس كتير بسرعة.')}`,
+ note:'التلخبط الأشهر: التكرار والانتشار. اسأل: النسخ ولا الوصول؟'});
+
+add({sec:'teach',min:'9 – 12',tag:U1L1,title:'المعلومات الأولية والثانوية',html:`
+ <div class="row">
+  <div style="flex:1">${card(`أولية ${E('Primary')}`,'بنحصل عليها <b>بأنفسنا</b> من التجربة الشخصية أو البحث والتجارب.',{eg:'تقارير تجارب · نتائج استبيانات · جداول استبيان'})}</div>
+  <div style="flex:1">${card(`ثانوية ${E('Secondary')}`,'بنحصل عليها <b>من طرف ثالث</b>، مش بشكل مباشر.',{c:'amber',eg:'كتب · صحف · تلفزيون'})}</div>
+ </div>
+ ${callout(`المعلومات الثانوية ممكن تختلف عن الأصلية (تفسيرات مضافة)، فلازم نقارنها بمصادر تانية. العملية دي اسمها <b>التحقق المتبادل ${E('Cross-checking')}</b>.`,'blue')}`,
+ note:'القاعدة: أنا اللي جمعتها = أولية. حد تاني جمعها وأنا استخدمتها = ثانوية.'});
+
+add({sec:'teach',min:'9 – 12',tag:U1L1,title:`الوسائط ${'(Media)'}`,cls:'sm',html:`
+ <div class="lead">الوسائط: وسائل لنقل المعلومات إلى عدد من الأفراد.</div>
+ ${tbl(['النوع','دوره','أمثلة'],[
+  [`وسائط التعبير ${E('Expression')}`,'للتعبير عن المعلومات','نص · صورة · صوت · فيديو'],
+  [`وسائط النقل/الإرسال ${E('Propagation')}`,'نقل المعلومات وتبادلها','تلفزيون · راديو · صحف · كتب · هاتف · إنترنت'],
+  [`وسائط التسجيل ${E('Recording')}`,'تسجيل وتخزين المعلومات','ورق · محركات USB · DVD · التخزين السحابي']])}
+ ${callout(`<b>الثقافة الإعلامية ${E('Media literacy')}:</b> القدرة على تفسير المعلومات اللي جاية من الوسائط <b>بدقة</b>.`,'blue')}`,
+ note:'اربط كل نوع بسؤال: بعبّر؟ بنقل؟ بسجّل؟'});
+
+Q({sec:'teach',min:'9 – 12',quick:true,tag:'سؤال سريع · '+L(1,1),level:'easy',
+ q:'تم تصوير مقطع فيديو وعمل منه 1000 نسخة بنفس الجودة تمامًا. أي خاصية للمعلومات ظهرت؟',
+ opts:['الاستمرارية','قابلية التكرار','الانتشار','المعرفة'],ans:1,
+ why:'<b>قابلية التكرار</b> هي إمكانية نسخ المعلومات بكميات كبيرة. الانتشار معناه وصولها لناس كتير بسرعة.',
+ mistake:'اختيار «الانتشار» لأن النسخ بتتوزع — لكن السؤال عن عمل النسخ نفسه.',lesson:L(1,1),
+ note:'سؤال سريع، دقيقة واحدة بالكتير.'});
+
+/* U1 L2 — 12–14.5 */
+const U1L2='الوحدة 1 · الدرس 2 — أخلاقيات المعلومات';
+add({sec:'teach',min:'12 – 14.5',tag:U1L2,title:'أخلاقيات المعلومات',cls:'sm',html:`
+ ${card(`أخلاقيات المعلومات ${E('Information Ethics')}`,'المفاهيم والتوجهات الأساسية اللازمة للقيام بأنشطة مناسبة في مجتمع المعلومات — <b>بغض النظر عن وجود قوانين</b>.',{c:'violet'})}
+ <div class="lead">المعلومات بتنتشر بسهولة ومتختفيش بسهولة، فقبل ما تنشر:</div>
+ ${grid(2,[
+  card('','لا تشارك صور وفيديوهات الآخرين <b>بدون إذن</b>.'),
+  card('','لا تسرّب <b>المعلومات الشخصية</b> لشخص آخر.',{c:'green'}),
+  card('','لا تشارك ما يحفظه <b>حقوق المؤلف</b> دون إذن.',{c:'amber'}),
+  card('','لا تنتهك <b>خصوصية</b> الآخرين، ولا تنشر تعليقات تشهير أو <b>تنمر إلكتروني</b> (Cyber bullying).',{c:'red'})],'xs')}`,
+ note:'وضّح إن الأخلاق مش مرتبطة بوجود قانون. المبدأ نفسه هو اللي بيحكم.'});
+
+add({sec:'teach',min:'12 – 14.5',tag:U1L2,title:'العلامة الجغرافية والمعلومات المضللة',html:`
+ ${grid(2,[
+  card(`العلامة الجغرافية ${E('Geotagging')}`,'معلومات (خطوط الطول والعرض) بتتضمّن في الصور والفيديوهات اللي بتتصور بالموبايل.<br>الخطر: ممكن حد يعرف <b>موقعك أو عنوان بيتك</b>.',{c:'amber'}),
+  card(`المعلومات المضللة والشائعات ${E('Disinformation and rumors')}`,'معلومات <b>كاذبة</b> بتتنشر <b>عمدًا</b> أو شائعات ملهاش أساس.',{c:'red'})])}
+ ${callout('كن مدركًا إن في ناس حقيقيين على الجانب التاني، وشارك المعلومات مع مراعاة وجهة نظرهم.','blue')}`,
+ note:'مثال حي: صورة قدام البيت ممكن تكشف العنوان لو الموقع مفعّل.'});
+
+add({sec:'teach',min:'12 – 14.5',tag:U1L2,title:'مشاكل الهواتف الذكية والسوشيال ميديا',cls:'xs',html:`
+ ${card(`وسائل التواصل الاجتماعي ${E('Social media')}`,'منصات بتخلّي الأفراد يتواصلوا مع بعض على الإنترنت.',{c:'violet'})}
+ ${grid(3,[
+  card(`إدمان الإنترنت ${E('Internet addiction')}`,'الانغماس المفرط لدرجة تعطيل الحياة اليومية.',{c:'red'}),
+  card(`الموبايل أثناء المشي ${E('Using smartphone while walking')}`,'استخدام الهاتف الذكي وإنت ماشي.',{c:'amber'}),
+  card(`الجريمة الإلكترونية ${E('Cybercrime')}`,'إساءة استخدام أجهزة الكمبيوتر والشبكات في أنشطة إجرامية.'),
+  card(`انتحال الشخصية ${E('Identity theft')}`,'شخص ينتحل شخصية فرد أو مؤسسة لسرقة هويات وكلمات مرور.',{c:'green'}),
+  card(`تسريب المعلومات الشخصية ${E('Leakage of personal information')}`,'الكشف عن معلومات المفروض تفضل سرية لطرف ثالث.',{c:'violet'})])}`,
+ note:'5 مشاكل. اطلب من الطلاب مثال لكل واحدة من الحياة.'});
+
+Q({sec:'teach',min:'12 – 14.5',quick:true,tag:'سؤال سريع · '+L(1,2),level:'easy',
+ q:'نشرت صورة قدام بيتك من موبايل شغّال عليه تحديد الموقع. إيه الخطر؟',
+ opts:['العلامة الجغرافية (Geotagging) ممكن تكشف موقع بيتك','إدمان الإنترنت','التنمر الإلكتروني','المعلومات المضللة'],ans:0,
+ why:'الصور بتتضمن خطوط الطول والعرض (<b>Geotagging</b>) فممكن حد يحدد مكان بيتك.',
+ mistake:'التركيز على محتوى الصورة وإهمال البيانات المخفية جواها.',lesson:L(1,2),note:'سؤال سريع.'});
+
+/* U2 L1 — 14.5–17.5 */
+const U2L1='الوحدة 2 · الدرس 1 — البيانات الشخصية';
+add({sec:'teach',min:'14.5 – 17.5',tag:U2L1,title:'ما هي البيانات الشخصية؟',cls:'sm',html:`
+ ${card(`البيانات الشخصية ${E('Personal information')}`,'أي بيان أو معلومة تتعلق بشخص طبيعي <b>محدد</b> أو يمكن تحديده، بشكل مباشر أو غير مباشر (حتى بالربط مع بيانات أخرى).',{c:'violet'})}
+ ${grid(3,[
+  card('البيانات الأساسية','الاسم · العنوان · تاريخ الميلاد · النوع'),
+  card('أرقام الهوية الشخصية','أرقام جواز السفر · رخصة القيادة · الرقم القومي',{c:'green'}),
+  card('البيانات الحساسة','العرق · الديانة · الآراء السياسية · الانتماءات النقابية · الحالة الاقتصادية والصحية · السجل الجنائي',{c:'red'})])}
+ <div class="mut" style="">وكمان البيانات البيومترية زي بصمة الإصبع وقزحية العين. <b>قانون حماية البيانات الشخصية</b> بيحدد قواعد جمعها ومعالجتها وتخزينها ونقلها.</div>`,
+ note:'التصنيف التلاتي (أساسية / أرقام هوية / حساسة) بييجي في الامتحان كتير.'});
+
+add({sec:'teach',min:'14.5 – 17.5',tag:U2L1,title:'توفير بياناتك لطرف ثالث',cls:'sm',html:`
+ ${callout('<b>القاعدة:</b> لا يجوز جمع أو معالجة أو مشاركة البيانات الشخصية إلا بعد <b>موافقة صريحة</b> من صاحبها.','blue')}
+ <div class="lead">استثناءات (بدون موافقة) في 5 حالات:</div>
+ ${grid(2,[
+  card('','1. التزويد مستندًا إلى قوانين ولوائح.'),
+  card('','2. لازم لحماية الأمن القومي أو مصلحة عامة.',{c:'green'}),
+  card('','3. ضروري لحماية حياة الشخص أو صحته أو ممتلكاته.',{c:'amber'}),
+  card('','4. لتنفيذ حكم قضائي أو طلب من جهة تحقيق.',{c:'violet'}),
+  card('','5. لإتمام عقد مع الشخص أو لحماية حقوقه.',{c:'red'})],'xs')}`,
+ note:'مش مطلوب حفظ الحالات حرفيًا، لكن افهم إن فيه استثناءات ضرورية.'});
+
+add({sec:'teach',min:'14.5 – 17.5',tag:U2L1,title:'الخصوصية · حقوق الصورة · حقوق الدعاية',cls:'sm',html:`
+ ${grid(3,[
+  card('الحق في الخصوصية','حق دستوري يحمي الحياة الخاصة من أي تدخل غير مشروع (المادة 57 من الدستور المصري). بيركز على كيفية جمع ومعالجة وتخزين بيانات الفرد.'),
+  card('حقوق الصورة','حق الفرد في منع الآخرين من <b>تصويره أو استخدام صورته أو مظهره دون إذنه</b>. القانون بيحظر نشر أو عرض أو توزيع صورة شخص دون موافقته.',{c:'green'}),
+  card('حقوق الدعاية','حق لحماية المصالح <b>الاقتصادية</b> للمشاهير في استغلال صورهم أو سمعتهم لأغراض تجارية أو دعائية.',{c:'amber'})])}`,
+ note:'الفرق: الصورة = إذن التصوير والنشر. الدعاية = العائد الاقتصادي للمشاهير.'});
+
+add({sec:'teach',min:'14.5 – 17.5',tag:U2L1,title:'حماية البيانات في الشركات والمنظمات',cls:'sm',html:`
+ ${grid(2,[
+  card(`سياسة الخصوصية ${E('Privacy policy')}`,'السياسة اللي تضعها الشركات لتوضيح كيفية جمع ومعالجة وحماية بيانات العملاء.'),
+  card(`ترخيص مركز حماية البيانات ${E('License')}`,'ترخيص تحصل عليه الشركات من الجهة المنظمة للتأكد من التزامها بالقانون.',{c:'green'}),
+  card(`نظام الموافقة المسبقة ${E('Prior Approval')}`,'لازم موافقة <b>صريحة ومسبقة</b> من المستخدم <b>قبل</b> جمع بياناته أو معالجتها أو تقديم الخدمة.',{c:'amber'}),
+  card(`نظام الاعتراض ${E('Objection')}`,'الخدمة تعالج بيانات المستخدم وتستمر <b>ما لم يعترض صراحةً</b> أو يطلب وقف المعالجة.',{c:'red'})])}`,
+ note:'الفرق الجوهري: الموافقة المسبقة = قبل. الاعتراض = بعد، لو المستخدم رفض.'});
+
+Q({sec:'teach',min:'14.5 – 17.5',quick:true,tag:'سؤال سريع · '+L(2,1),level:'easy',
+ q:'رقم جواز السفر يتصنف إيه ضمن البيانات الشخصية؟',
+ opts:['بيانات أساسية','أرقام الهوية الشخصية','بيانات حساسة','معلومات مجهولة الهوية'],ans:1,
+ why:'أرقام جواز السفر ورخصة القيادة والرقم القومي = <b>أرقام الهوية الشخصية</b>.',
+ mistake:'البيانات الأساسية هي: الاسم، العنوان، تاريخ الميلاد، النوع.',lesson:L(2,1),note:'سريع.'});
+
+/* U2 L2 — 17.5–20.5 */
+const U2L2='الوحدة 2 · الدرس 2 — حقوق الملكية الفكرية';
+add({sec:'teach',min:'17.5 – 20.5',tag:U2L2,title:'حقوق الملكية الفكرية',html:`
+ ${card(`حقوق الملكية الفكرية ${E('Intellectual Property Rights')}`,'حقوق تحمي <b>نتاج الإبداع الفكري البشري</b> في المجالات الأدبية والفنية والعلمية والتجارية.',{c:'violet'})}
+ ${grid(3,[
+  card('حقوق الملكية الصناعية','براءات الاختراع · العلامات التجارية · الرسوم والنماذج الصناعية · المؤشرات الجغرافية',{eg:'<b>تتطلب تسجيل</b>'}),
+  card('حقوق المؤلف','الأعمال الأدبية والفنية: روايات · أفلام · لوحات · صور · موسيقى · برامج كمبيوتر',{c:'green',eg:'<b>بدون تسجيل</b>'}),
+  card('الحقوق المجاورة','للمؤدين ومنتجي التسجيلات وهيئات الإذاعة',{c:'amber'})])}`,
+ note:'التقسيم الأهم: صناعية (بتسجيل) × مؤلف (بدون تسجيل).'});
+
+add({sec:'teach',min:'17.5 – 20.5',tag:U2L2,title:'حقوق الملكية الصناعية',cls:'xs',html:`
+ ${tbl(['النوع','موضوع الحماية','مدة الحماية'],[
+  [`براءة الاختراع ${E('Patent')}`,'الاختراعات التقنية الجديدة القابلة للتطبيق الصناعي','<b>20 سنة</b> من تاريخ التقديم'],
+  ['نموذج المنفعة','حلول تقنية بسيطة أو تحسينات عملية (أقل ابتكارًا من الاختراع)','<b>7 سنوات</b> من تاريخ التقديم'],
+  ['الرسوم والنماذج الصناعية','المظهر الخارجي للمنتج: الشكل أو الخطوط أو الأنماط أو الألوان','<b>10 سنوات</b> من التقديم (تتجدد مرة واحدة كل 5 سنوات)'],
+  ['العلامة التجارية','إشارة تميز منتجات أو خدمات عن غيرها (أسماء، حروف، أرقام، رموز، ألوان…)','<b>10 سنوات</b> من التسجيل (وتتجدد)']])}
+ ${callout(`<b>مبدأ الشكلية ${E('Formality')}:</b> لازم التسجيل عند الجهة المختصة (مثل مكتب براءات الاختراع المصري) عشان تتمتع بالحماية القانونية.`,'blue')}`,
+ note:'الأرقام 20 / 7 / 10 / 10 بتتسأل كتير. اطلب منهم يكتبوها.'});
+
+add({sec:'teach',min:'17.5 – 20.5',tag:U2L2,title:'حقوق المؤلف',cls:'xs',html:`
+ ${grid(2,[
+  card(`حقوق المؤلف ${E('Copyrights')}`,`حقوق للأنشطة الإبداعية في الفنون (روايات، أفلام، لوحات، موسيقى، برامج كمبيوتر…). تتبع مبدأ <b>عدم التسجيل ${E('Non-Formality')}</b>: بتنشأ <b>لحظة إنشاء العمل</b>، حتى لو المؤلف هاوٍ أو قاصر.`,{c:'green'}),
+  card('نوعا الحقوق للمبدع','<b>معنوية:</b> الصلة الشخصية بالمصنف (نسب العمل إليه ومنع التعديل أو التحريف).<br><b>النشر والطبع (مادية):</b> الحق في الاستغلال الاقتصادي (نسخ، توزيع، ترجمة، أداء علني).',{c:'violet'}),
+  card(`الحقوق المجاورة ${E('Neighboring')}`,'للمؤدين (مطربين، ممثلين) ومنتجي التسجيلات وهيئات الإذاعة.',{c:'amber'}),
+  card('المدة والانتهاك','المدة: <b>عمر المؤلف + 50 سنة</b> بعد وفاته.<br>الانتهاك: استخدام العمل المحمي <b>دون إذن</b> من المبدع.',{c:'red'})])}`,
+ note:'ركّز: حق المؤلف بدون تسجيل، ومدته 50 سنة بعد الوفاة.'});
+
+Q({sec:'teach',min:'17.5 – 20.5',quick:true,tag:'سؤال سريع · '+L(2,2),level:'easy',
+ q:'أي حق من التالي بيتحمي من لحظة إنشاء العمل بدون ما تسجّله؟',
+ opts:['حق براءة الاختراع','حق العلامة التجارية','حق المؤلف','حق نموذج المنفعة'],ans:2,
+ why:'<b>حق المؤلف</b> بيتبع مبدأ عدم التسجيل. الباقي حقوق صناعية لازم تتسجّل (مبدأ الشكلية).',
+ mistake:'نسيان إن الملكية الصناعية تحتاج تسجيل بينما حق المؤلف لا.',lesson:L(2,2),note:'سريع.'});
+
+/* U2 L3 — 20.5–23 */
+const U2L3='الوحدة 2 · الدرس 3 — استخدام المعلومات والكشف عنها';
+add({sec:'teach',min:'20.5 – 23',tag:U2L3,title:'الاستخدام العادل والاقتباس',cls:'xs',html:`
+ ${grid(2,[
+  card(`الاستخدام العادل ${E('Fair use')}`,'الغرض من حقوق المؤلف: المساهمة في التطور الثقافي عبر <b>الاستخدام العادل</b> للأعمال المحمية و<b>حماية الحقوق</b>.<br>استثناءات تسمح بالاستخدام دون إذن: الاستنساخ الشخصي، الاستنساخ داخل <b>المؤسسات التعليمية</b>، العروض غير الربحية.',{c:'green'}),
+  card(`الاقتباس ${E('Quotation')}`,'استخدام جزء من عمل محمي دون إذن بشروط:',{c:'violet'})])}
+ ${grid(3,[
+  card('','1. عملك هو الأساس والمقتبس تابع له.'),
+  card('','2. وجود ضرورة للاقتباس.',{c:'green'}),
+  card('','3. ألا يضر بالمصالح المشروعة للمؤلف.',{c:'amber'}),
+  card('','4. تمييز المقتبس بوضوح (بين علامتي اقتباس).',{c:'violet'}),
+  card('','5. تحديد المصدر بوضوح.',{c:'red'}),
+  card('','6. عدم تغيير المادة المقتبسة.')])}`,
+ note:'الاقتباس 6 شروط. ركّز على: المصدر + علامات الاقتباس + عدم التغيير.'});
+
+add({sec:'teach',min:'20.5 – 23',tag:U2L3,title:'رخص المشاع الإبداعي',cls:'sm',html:`
+ ${card(`ترخيص المشاع الإبداعي ${E('Creative Commons / CC')}`,'علامة بتشير لشروط استخدام الأعمال المحمية بحقوق النشر.',{c:'violet'})}
+ ${tbl(['الشرط','الرمز','المحتوى'],[
+  ['الإشارة لفضل المبدع',E('BY'),'اعرض عنوان العمل واسم المؤلف.'],
+  ['غير تجاري',E('NC'),'لا تستخدمه لأغراض تجارية.'],
+  ['لا مشتقات',E('ND'),'لا تغيّر العمل المحمي بحقوق المؤلف.'],
+  ['نفس شروط التراخيص',E('SA'),'انشر أي عمل مُعدَّل تحت نفس مجموعة التراخيص الأصلية.']])}`,
+ note:'BY نسب، NC غير تجاري، ND من غير تعديل، SA نفس الشروط.'});
+
+Q({sec:'teach',min:'20.5 – 23',quick:true,tag:'سؤال سريع · '+L(2,3),level:'easy',
+ q:'عايز تقتبس فقرة من كتاب في تقريرك. أنهي تصرف صحيح؟',
+ opts:['أنقل صفحات كاملة وأكتبها كأنها من عندي','أحدد المصدر بوضوح وأحط المقتبس بين علامتي اقتباس','أعدّل في كلام المؤلف براحتي','أنقل من غير ذكر المصدر لأن الكتاب قديم'],ans:1,
+ why:'من شروط الاقتباس: <b>تمييز المقتبس بوضوح وتحديد المصدر وعدم تغييره</b>.',
+ mistake:'ظن إن الكتاب القديم يُسمح بنقله بدون مصدر.',lesson:L(2,3),note:'سريع.'});
+
+/* U3 L1 — 23–26 */
+const U3L1='الوحدة 3 · الدرس 1 — تهديدات أمن المعلومات (1)';
+add({sec:'teach',min:'23 – 26',tag:U3L1,title:'أمن المعلومات: 3 عناصر',html:`
+ ${card(`أمن المعلومات ${E('Information security')}`,'عملية إدارة المعلومات بشكل صحيح والحفاظ عليها <b>آمنة</b>.',{c:'violet'})}
+ ${grid(3,[
+  card(`السرية ${E('Confidentiality')}`,'الأفراد <b>المصرّح لهم فقط</b> يمكنهم الوصول للمعلومات.',{eg:'ملف سري متفتحوش لأي حد'}),
+  card(`السلامة ${E('Integrity')}`,'المعلومات <b>لم يتم تدميرها أو العبث بها أو محوها</b>.',{c:'green',eg:'درجات اتعدّلت = ضربة للسلامة'}),
+  card(`التوافرية ${E('Availability')}`,'الوصول للمعلومات <b>في أي وقت عند الحاجة</b>.',{c:'amber',eg:'موقع وقع بسبب هجوم = ضربة للتوافرية'})])}`,
+ note:'السرية: مين يشوف. السلامة: مين يعدّل. التوافرية: هل موجودة وقت ما أحتاجها.'});
+
+add({sec:'teach',min:'23 – 26',tag:U3L1,title:'الوصول غير المصرح به والاختراق',cls:'sm',html:`
+ ${grid(2,[
+  card(`الوصول غير المصرح به ${E('Unauthorized access')}`,'الوصول لنظام بشكل غير قانوني للتلاعب بالبيانات أو محوها أو سرقتها.',{c:'red'}),
+  card(`الاختراق ${E('Cracking')}`,`نفس الأفعال السابقة، والشخص اللي بيرتكبها اسمه <b>مخترق ${E('cracker')}</b>.`,{c:'amber'})])}
+ ${card(`الجريمة الإلكترونية ${E('Cybercrime')}`,'أفعال إجرامية تُرتكب عبر شبكات الكمبيوتر، وتشمل:',{c:'violet'})}
+ ${grid(3,[
+  card('','1. انتهاك قانون الوصول غير المصرح به باستخدام <b>هوية وكلمة مرور شخص آخر</b>.'),
+  card('','2. جرائم الكمبيوتر والسجلات الإلكترونية: العبث بالبيانات المخزنة أو التلاعب بها.',{c:'green'}),
+  card('','3. جرائم قائمة على الشبكة: <b>احتيال، تشهير، انتهاك حقوق المؤلف</b>.',{c:'amber'})],'xs')}`,
+ note:'3 أنواع للجريمة الإلكترونية. اطلب أمثلة.'});
+
+add({sec:'teach',min:'23 – 26',tag:U3L1,title:`البرمجيات الخبيثة ${'(Malware)'}`,cls:'xs',html:`
+ <div class="lead" style="">برامج ضارة بتتصيب بيها الأجهزة عبر مواقع الويب أو مرفقات الإيميل أو محركات USB أو الشبكات.</div>
+ ${grid(3,[
+  card(`فيروس الكمبيوتر ${E('Virus')}`,'برنامج مصمم لإحداث ضرر <b>بشكل متعمد</b> مثل تدمير البيانات أو البرامج.',{c:'red'}),
+  card(`حصان طروادة ${E('Trojan horse')}`,'برنامج <b>يتنكر كبرنامج شرعي</b> ويتسلل للنظام ويبدأ الهجمات بهدوء.',{c:'amber'}),
+  card(`الدودة ${E('Worm')}`,'برنامج <b>ينسخ نفسه وينتشر</b> عبر الإنترنت مثل الدودة، فيوسّع الإصابة.',{c:'violet'}),
+  card(`برنامج التجسس ${E('Spyware')}`,'يجمع المعلومات الشخصية <b>دون علم المستخدم</b> ويرسلها لطرف ثالث.<br>• مسجل لوحة المفاتيح Keylogger: يسجل ضغطات المفاتيح<br>• برنامج الإعلانات Adware: يعرض إعلانات غير مرغوبة',{c:'green'}),
+  card(`برنامج الفدية ${E('Ransomware')}`,'يجعل البيانات <b>غير قابلة للوصول</b> ويطلب <b>فدية</b> لاستعادتها.',{c:'red'})])}`,
+ note:'الدودة = تنسخ نفسها وتنتشر. الحصان = يتنكر. الفدية = تقفل وتطلب فلوس.'});
+
+Q({sec:'teach',min:'23 – 26',quick:true,tag:'سؤال سريع · '+L(3,1),level:'easy',
+ q:'فتحت مرفق إيميل، وبعدها ظهرت إعلانات كتير ما طلبتهاش. غالبًا ده…',
+ opts:['برنامج الإعلانات (Adware)','مسجل لوحة المفاتيح (Keylogger)','برنامج الفدية (Ransomware)','هجوم لحجب الوصول'],ans:0,
+ why:'<b>Adware</b> برنامج يعرض إعلانات غير مرغوب فيها دون موافقة المستخدم (نوع من برامج التجسس).',
+ mistake:'الخلط بين Adware (إعلانات) و Ransomware (فدية).',lesson:L(3,1),note:'سريع.'});
+
+/* U3 L2 — 26–29 */
+const U3L2='الوحدة 3 · الدرس 2 — التدابير المضادة (2)';
+add({sec:'teach',min:'26 – 29',tag:U3L2,title:'كلمات المرور والمصادقة',cls:'sm',html:`
+ ${grid(2,[
+  card(`كلمة المرور ${E('Password')}`,'سلسلة أحرف للتحقق من هوية المستخدم وإنه صاحب الحساب الشرعي.<br><b>إرشادات:</b>',{c:'violet'}),
+  card('','• استخدم سلسلة <b>طويلة</b> قدر الإمكان.<br>• <b>اجمع</b> بين الأحرف الكبيرة والصغيرة والأرقام والرموز.<br>• لا تستخدم معلومات شخصية (ميلاد، عنوان، إيميل).<br>• لا تُعد استخدام كلمات المرور في خدمات أخرى.',{c:'green'})])}
+ ${grid(2,[
+  card(`كلمة المرور لمرة واحدة ${E('OTP')}`,'كلمة مرور <b>تتغير على فترات منتظمة</b> ولا يمكن استخدامها <b>إلا مرة واحدة</b>.',{c:'amber'}),
+  card(`المصادقة ${E('Authentication')}`,'عملية التحقق من هوية المستخدم على كمبيوتر أو شبكة.',{c:'red'})])}`,
+ note:'OTP بتحمي حتى لو اتسرّبت، لأنها تنتهي بعد استخدام واحد.'});
+
+add({sec:'teach',min:'26 – 29',tag:U3L2,title:'أنواع المصادقة',cls:'xs',html:`
+ ${tbl(['النوع','الطريقة','أمثلة'],[
+  [`قائمة على المعرفة ${E('Knowledge-based')}`,'معلومات يعرفها الفرد فقط','معرف المستخدم وكلمة المرور · رمز PIN'],
+  [`بيومترية ${E('Biometrics')}`,'خصائص فيزيائية أو سلوكية للفرد','بصمة الإصبع · قزحية العين · نمط الوريد · خط اليد'],
+  [`قائمة على الحيازة ${E('Possession-based')}`,'عنصر يمتلكه الفرد','بطاقة ذكية · OTP · رسائل نصية قصيرة'],
+  [`ثنائية بعاملين مختلفين ${E('Two-factor')}`,'تجمع <b>نوعين مختلفين</b> من العوامل (معرفة + حيازة)','PIN + رمز عبر SMS'],
+  [`متعددة الخطوات ${E('Two-step')}`,'خطوتان <b>من نفس نوع العامل</b>','كلمة مرور + سؤال سري']])}`,
+ note:'الفخ: Two-factor = نوعين مختلفين. Two-step = نفس النوع مرتين.'});
+
+add({sec:'teach',min:'26 – 29',tag:U3L2,title:'إجراءات أمن المعلومات',cls:'sm',html:`
+ ${grid(2,[
+  card(`التحكم في الوصول ${E('Access control')}`,'طريقة للحد من الوصول لأنظمة الكمبيوتر أو البيانات بحيث يُسمح <b>لمستخدمين محددين فقط</b>، ويتم التحقق منهم عبر المصادقة.'),
+  card(`جدار الحماية ${E('Firewall')}`,'نظام يمنع <b>الوصول غير المصرح به من الخارج</b>، ويمنع <b>تسرّب البيانات من الداخل</b>.',{c:'green'})])}
+ ${card('مواجهة فيروسات الكمبيوتر','',{c:'red'})}
+ ${grid(3,[
+  card('','ثبّت <b>برنامج مكافحة الفيروسات</b> وحدّث تعريفاته.'),
+  card('','حدّث نظام التشغيل (OS) والبرامج لمنع الثغرات الأمنية.',{c:'green'}),
+  card('','أنشئ <b>نسخًا احتياطية</b> لبياناتك بانتظام.',{c:'amber'})],'xs')}`,
+ note:'التحكم في الوصول يعتمد على المصادقة. الجدار بيمنع من الخارج ومن الداخل.'});
+
+Q({sec:'teach',min:'26 – 29',quick:true,tag:'سؤال سريع · '+L(3,2),level:'mid',
+ q:'دخلت كلمة المرور، وبعدها وصلك رمز على موبايلك عن طريق SMS دخلته. ده نوع…',
+ opts:['مصادقة قائمة على المعرفة فقط','مصادقة بيومترية','مصادقة ثنائية بعاملين مختلفين (معرفة + حيازة)','مصادقة متعددة الخطوات من نفس العامل'],ans:2,
+ why:'كلمة المرور = <b>معرفة</b>، والموبايل/الرمز = <b>حيازة</b> → عاملان مختلفان = <b>Two-factor</b>.',
+ mistake:'الخلط مع Two-step اللي بتكون الخطوتان فيه من نفس النوع (كلمة مرور + سؤال سري).',lesson:L(3,2),note:'خلّيهم يحددوا العامل الأول والتاني.'});
+
+/* U3 L3 — 29–31.5 */
+const U3L3='الوحدة 3 · الدرس 3 — التدابير المضادة (3)';
+add({sec:'teach',min:'29 – 31.5',tag:U3L3,title:'الاحتيال بالفواتير والتصيّد',cls:'sm',html:`
+ ${grid(3,[
+  card(`فاتورة احتيالية ${E('Fraudulent billing')}`,'فاتورة لشخص مقابل خدمة <b>وهمية</b> لم يستخدمها، لهدف الحصول على المال.',{c:'amber'}),
+  card(`الاحتيال بنقرة واحدة ${E('One-click fraud')}`,'النقر على رابط في موقع أو إيميل فيظهر إعلان إنك أبرمت عقدًا وتُطالب بدفع مبلغ.',{c:'red'}),
+  card(`التصيّد ${E('Phishing')}`,'احتيال بمواقع ويب <b>مزيفة</b> تتنكر كمؤسسات مالية/هيئات عامة لسرقة رموز PIN وتفاصيل الحساب.',{c:'violet'})])}
+ ${callout('ارجع لسؤال الافتتاح: رسالة الجايزة اللي بتطلب الـ PIN = <b>تصيّد (Phishing)</b>.','blue')}`,
+ note:'اربط بسؤال الافتتاح. الفرق: الفاتورة الاحتيالية خدمة وهمية، والنقرة الواحدة عقد مزيف بعد الضغط.'});
+
+add({sec:'teach',min:'29 – 31.5',tag:U3L3,title:'الهندسة الاجتماعية والتزوير',cls:'sm',html:`
+ ${card(`الهندسة الاجتماعية ${E('Social engineering')}`,'الحصول على معلومات بشكل احتيالي عن طريق <b>استغلال علم النفس البشري أو الإهمال أو قلة الوعي</b>.',{c:'violet'})}
+ ${grid(3,[
+  card(`انتحال الشخصية ${E('Impersonation')}`,'التظاهر بأنك شخص آخر (مكالمة باسم الشخص الآخر) للحصول على معلومات.',{c:'amber'}),
+  card(`التجسس المباشر ${E('Shoulder surfing')}`,'التلصص على الشاشة أو لوحة المفاتيح لسرقة كلمات المرور أو PIN.',{c:'red'}),
+  card(`البحث في المهملات ${E('Dumpster diving')}`,'البحث في الزبالة عن معلومات سرية تم التخلص منها.',{c:'green'})])}
+ ${card(`التزوير ${E('Skimming')}`,'استخراج بيانات بطاقة ائتمان/خصم بشكل غير قانوني واستخدامها لإنشاء بطاقة مزورة.',{c:'amber'})}`,
+ note:'التجسس المباشر = عين. المهملات = زبالة. الانتحال = مكالمة. Skimming = جهاز بيسحب بيانات الكارت.'});
+
+add({sec:'teach',min:'29 – 31.5',tag:U3L3,title:'سياسة أمن المعلومات',html:`
+ ${card(`سياسة أمن المعلومات ${E('Information Security Policy')}`,'مجموعة القواعد والإرشادات الأساسية التي تضعها شركة أو منظمة للحفاظ على أمن المعلومات وحمايتها.',{c:'violet'})}
+ <div class="pyr">
+  <div style="width:46%;background:linear-gradient(90deg,#1c3f87,#2f7bff)">السياسة الأساسية<br><span style="font-weight:500;">تصف المبادئ والإعلانات الأساسية</span></div>
+  <div style="width:70%;background:linear-gradient(90deg,#1778b8,#27a8d8)">معايير الأمان<br><span style="font-weight:500;">القواعد اللازمة لتطبيق السياسة عمليًا</span></div>
+  <div style="width:94%;background:linear-gradient(90deg,#12908f,#2cc4a0)">إجراءات التنفيذ وقواعد التشغيل<br><span style="font-weight:500;">تحدد بوضوح ما يلزم حسب الجمهور المستهدف والغرض</span></div>
+ </div>`,
+ note:'المثلث من الأعلى للأسفل: مبادئ ← معايير ← إجراءات تنفيذ.'});
+
+Q({sec:'teach',min:'29 – 31.5',quick:true,tag:'سؤال سريع · '+L(3,3),level:'easy',
+ q:'حد اتصل بيك وقال «أنا من الدعم الفني للبنك، قولي الـ PIN». ده مثال على…',
+ opts:['التزوير (Skimming)','انتحال الشخصية (Impersonation)','البحث في المهملات','التجسس المباشر'],ans:1,
+ why:'التظاهر بإنه شخص أو جهة موثوقة عبر مكالمة = <b>انتحال الشخصية</b> (من أنواع الهندسة الاجتماعية).',
+ mistake:'الخلط بين Skimming (نسخ بيانات الكارت) وانتحال الشخصية.',lesson:L(3,3),note:'سريع.'});
+
+/* U6 L2 — 31.5–34.5 */
+const U6L2='الوحدة 6 · الدرس 2 — النظام الثنائي وكمية البيانات';
+add({sec:'teach',min:'31.5 – 34.5',tag:U6L2,title:`البت ${'(bit)'} والبايت ${'(Byte)'}`,cls:'sm',html:`
+ ${grid(2,[
+  card(`البت ${E('bit')}`,'أصغر وحدة للمعلومات، ليها حالتان فقط: <b>0 أو 1</b>. ممكن 1 bit يمثل حالتين (مفتوح/مغلق).',{c:'violet'}),
+  card(`البايت ${E('Byte')}`,'وحدة من <b>8 bit</b>. يرمز له بالرمز B.<br>1 B = 8 bit ← <b>256 احتمال</b> (2<sup>8</sup>).',{c:'green'})])}
+ ${tbl(['عدد الـ bit','الاحتمالات','العدد'],[
+  ['1 bit',N('0 , 1'),'2<sup>1</sup> = 2'],['2 bit',N('00 · 01 · 10 · 11'),'2<sup>2</sup> = 4'],['3 bit',N('000 … 111'),'2<sup>3</sup> = 8']])}
+ ${callout('<b>القاعدة:</b> عدد bit = n يمثّل <b>2<sup>n</sup></b> احتمال مختلف من البيانات.','blue')}`,
+ note:'القاعدة 2 أس n. لو 5 bit = 32، 6 bit = 64.'});
+
+add({sec:'teach',min:'31.5 – 34.5',tag:U6L2,title:'وحدات قياس البيانات',html:`
+ <div class="flow" style="align-items:center">
+  ${card('1 KB','= 1024 B',{c:''})}<div class="arrow x">×1024</div>
+  ${card('1 MB','= 1024 KB',{c:'green'})}<div class="arrow x">×1024</div>
+  ${card('1 GB','= 1024 MB',{c:'amber'})}<div class="arrow x">×1024</div>
+  ${card('1 TB','= 1024 GB',{c:'violet'})}
+ </div>
+ ${callout('<b>الوحدة الأساسية هي 1 B</b>، وبتتغير كل وحدة <b>1,024 مرة</b> (مش 1000!).','')}
+ <div class="lead">مثال: <span class="ltr num">2 KB = 2 × 1024 = <b>2048</b> Byte</span></div>`,
+ note:'الفخ الشهير: 1000 بدل 1024.'});
+
+add({sec:'teach',min:'31.5 – 34.5',tag:U6L2,title:'من الثنائي إلى العشري',cls:'sm',init:'bits',html:`
+ <div class="lead">اضرب كل رقم ثنائي في <b>2 مرفوعة لقوة موقعه</b> (من اليمين تبدأ من 0)، واجمع.</div>
+ <div class="bits" id="bits"></div>
+ <div class="card center" style=""><div id="bitsf" class="ltr num"></div></div>
+ <div class="reveal-hint">اضغط على أي خانة لتغيير قيمتها. مثال الكتاب: <span class="ltr num">10111<sub>2</sub> = 16+4+2+1 = <b>23</b></span></div>`,
+ note:'خلّي طالب يجي يقلّب الخانات. ابدأ بـ 10111 = 23.'});
+
+add({sec:'teach',min:'31.5 – 34.5',tag:U6L2,title:'من العشري إلى الثنائي',cls:'sm',html:`
+ <div class="lead">اقسم العدد على 2 باستمرار، خد <b>باقي القسمة (r)</b> كل مرة، واكتب البواقي <b>من الأخير للأول</b>.</div>
+ ${grid(2,[
+  `<div class="card"><h3>مثال: 6</h3><div class="ltr num" style="line-height:1.75;">6 ÷ 2 = 3 &nbsp; r <b>0</b><br>3 ÷ 2 = 1 &nbsp; r <b>1</b><br>1 ÷ 2 = 0 &nbsp; r <b>1</b></div><p style="margin-top:8px">← ${B('110')}</p></div>`,
+  `<div class="card green"><h3>مثال: 39</h3><div class="ltr num" style="line-height:1.55;">39 ÷ 2 = 19 &nbsp; r <b>1</b><br>19 ÷ 2 = 9 &nbsp;&nbsp; r <b>1</b><br>9 ÷ 2 = 4 &nbsp;&nbsp;&nbsp; r <b>1</b><br>4 ÷ 2 = 2 &nbsp;&nbsp;&nbsp; r <b>0</b><br>2 ÷ 2 = 1 &nbsp;&nbsp;&nbsp; r <b>0</b><br>1 ÷ 2 = 0 &nbsp;&nbsp;&nbsp; r <b>1</b></div><p style="margin-top:6px">← ${B('100111')}</p></div>`])}
+ ${callout('اقرأ البواقي <b>من تحت لفوق</b> — أكبر غلطة في الباب ده ترتيبهم!','')}`,
+ note:'ارسم السهم من الأخير للأول بالقلم.'});
+
+Q({sec:'teach',min:'31.5 – 34.5',quick:true,tag:'سؤال سريع · '+L(6,2),level:'easy',
+ q:'كام احتمال مختلف نقدر نمثّله باستخدام 5 bit؟',
+ opts:['10','16','32','64'],ans:2,
+ why:'عدد الاحتمالات = 2<sup>5</sup> = <b>32</b>.',
+ mistake:'ضرب 5×2=10 بدل رفع 2 للأس 5.',lesson:L(6,2),note:'سريع.'});
+
+/* U6 L3 — 34.5–36.5 */
+const U6L3='الوحدة 6 · الدرس 3 — النظام السادس عشر';
+const hexCells=()=>{let h='<div class="hexg">';for(let i=0;i<16;i++){h+=`<div><b>${i.toString(16).toUpperCase()}</b><span>${i}</span>${i.toString(2).padStart(4,'0')}</div>`}return h+'</div>'};
+add({sec:'teach',min:'34.5 – 36.5',tag:U6L3,title:'النظام السادس عشر (Hexadecimal)',cls:'sm',html:`
+ <div class="lead">بيستخدم الأرقام <b>0 – 9</b> والحروف <b>A – F</b> (16 رمز). الرقم الممثل بيه بيتكتب ${B('A4',16)}.</div>
+ ${hexCells()}
+ <div class="reveal-hint" style="direction:rtl">كل خانة: (الرمز السادس عشر · قيمته العشرية · الثنائي)</div>`,
+ note:'احفظ: A=10, B=11, C=12, D=13, E=14, F=15.'});
+
+add({sec:'teach',min:'34.5 – 36.5',tag:U6L3,title:'التحويل بين الأنظمة',cls:'xs',html:`
+ ${grid(3,[
+  card('ثنائي ← سادس عشر','قسّم الرقم الثنائي لمجموعات من <b>4 bit</b> (من اليمين)، وحوّل كل مجموعة.',{eg:`<span class="ltr num">1001 1010 → 9A<sub>16</sub></span>`}),
+  card('سادس عشر ← ثنائي','حوّل كل رمز لـ <b>4 bit</b> ورتّبهم.',{c:'green',eg:`<span class="ltr num">A4 → 1010 0100</span>`}),
+  card('سادس عشر ← عشري','حوّل لثنائي ثم لعشري.',{c:'amber',eg:`<span class="ltr num">C6 = 1100 0110 = <b>198</b></span>`})])}
+ ${callout(`عشان تتأكد: <span class="ltr num">C6<sub>16</sub> → 128 + 64 + 4 + 2 = <b>198</b></span>`,'blue')}`,
+ note:'كل رمز hex = 4 bit بالظبط.'});
+
+Q({sec:'teach',min:'34.5 – 36.5',quick:true,tag:'سؤال سريع · '+L(6,3),level:'easy',
+ q:`حوّل ${'11110000'} من الثنائي إلى السادس عشر.`,
+ opts:['F0','0F','E0','8F'],ans:0,
+ why:'1111 = F ، 0000 = 0 → <b>F0</b>.',mistake:'ترتيب المجموعتين بالعكس (0F).',lesson:L(6,3),note:'سريع.'});
+
+/* U6 L4 — 36.5–38 */
+const U6L4='الوحدة 6 · الدرس 4 — التمثيل الرقمي للأحرف';
+add({sec:'teach',min:'36.5 – 38',tag:U6L4,title:'رموز الأحرف',cls:'xs',html:`
+ ${grid(3,[
+  card(`رمز الحرف ${E('Character code')}`,'قيمة رقمية فريدة لكل حرف أو رمز.'),
+  card(`نظام رموز الأحرف ${E('Character code system')}`,'يلخص التحويلات بين الأحرف ورموزها.',{c:'green'}),
+  card(`ASCII`,'للغة الإنجليزية فقط (أحرف، أرقام، رموز، أحرف تحكم)، ولا يدعم لغات أخرى.',{c:'amber'}),
+  card(`Unicode`,'معيار يجمع أحرف جميع أنحاء العالم في رمز واحد (UTF-8 و UTF-16).',{c:'violet'}),
+  card(`الترميز ${E('Encoding')}`,'تمثيل سلسلة نصية برموز الأحرف. العكس: فك التشفير <b>Decoding</b>.',{c:'red'}),
+  card(`فساد الأحرف ${E('Character corruption')}`,'يحدث لعدم تطابق أساليب الترميز وفك الترميز.')])}
+ ${callout(`الخط ${E('Font')}: بيانات شكل الأحرف المقابلة لرموزها. لعرض حرف نحتاج <b>رمز الحرف + الخط</b>.`,'blue')}`,
+ note:'ASCII لغة إنجليزية فقط. Unicode لكل اللغات.'});
+
+const asciiTbl=(hi=[])=>{const nm={0x20:'SP',0x7f:'DEL'};let h='<table class="ascii"><tr><th></th>';
+ for(let c=2;c<=7;c++)h+=`<th>${c}</th>`;h+='</tr>';
+ for(let r=0;r<16;r++){h+=`<tr><th>${r.toString(16).toUpperCase()}</th>`;
+  for(let c=2;c<=7;c++){const code=c*16+r;const ch=nm[code]||String.fromCharCode(code).replace('&','&amp;').replace('<','&lt;');
+   h+=`<td class="${hi.includes(code)?'hi':''}">${ch}</td>`}h+='</tr>'}
+ return h+'</table>'};
+add({sec:'teach',min:'36.5 – 38',tag:U6L4,title:'جدول ASCII ومثال Hello',cls:'xs',html:`
+ <div class="row" style="align-items:center;gap:30px">
+  <div style="flex:none">${asciiTbl([0x48,0x65,0x6c,0x6f])}</div>
+  <div style="flex:1" class="sm">
+   ${card('اقرأ الحرف من الجدول','رقم <b>العمود</b> (الأعلى) أولًا ثم رقم <b>الصف</b> (الأقل أهمية).',{})}
+   ${tbl(['الحرف','H','e','l','l','o'],[['Hex',N('48'),N('65'),N('6C'),N('6C'),N('6F')],['ثنائي',N('01001000'),N('01100101'),N('01101100'),N('01101100'),N('01101111')]])}
+  </div></div>`,
+ note:'H في العمود 4 والصف 8 = 48. وهكذا. تقدر تلوّن الخانات اللي في الجدول.'});
+
+Q({sec:'teach',min:'36.5 – 38',quick:true,tag:'سؤال سريع · '+L(6,4),level:'mid',
+ q:'ما الكلمة التي ترمز لها السلسلة 43 61 74 بالنظام السادس عشر (ASCII)؟',
+ opts:['Cat','Car','Bat','Cut'],ans:0,
+ why:'43 = C ، 61 = a ، 74 = t → <b>Cat</b>.',mistake:'عدم الرجوع للجدول لكل رمز على حدة.',lesson:L(6,4),note:'خلّيهم يستعملوا الجدول.'});
+
+/* U6 L5 — 38–39 */
+const U6L5='الوحدة 6 · الدرس 5 — العمليات الحسابية العددية (1)';
+add({sec:'teach',min:'38 – 39',tag:U6L5,title:'الجمع الثنائي',cls:'sm',html:`
+ ${grid(2,[
+  card('قواعد الجمع',`<div class="ltr num" style="line-height:1.9;">0+0 = 0<br>0+1 = 1<br>1+0 = 1<br>1+1 = 10 &nbsp;(0, <b>Carry</b> 1)<br>1+1+1 = 11</div>`,{}),
+  card('مثال',`<div class="ltr num" style="line-height:1.7;white-space:pre"><span class="mut">carry  0010</span>\n       0101\n     + 1001\n     ──────\n       <b>1110</b></div><p><span class="ltr num">5 + 9 = 14 ✓</span></p>`,{c:'green'})])}`,
+ note:'عند 1+1 اكتب صفر وشيل واحد للخانة اللي بعدها (Carry).'});
+
+add({sec:'teach',min:'38 – 39',tag:U6L5,title:'الطرح الثنائي',cls:'sm',html:`
+ ${grid(2,[
+  card('قواعد الطرح',`<div class="ltr num" style="line-height:1.9;">0−0 = 0<br>1−0 = 1<br>1−1 = 0<br>0−1 = 1 &nbsp;(after <b>Borrow</b>)</div>`,{}),
+  card('مثال',`<div class="ltr num" style="line-height:1.7;white-space:pre">  1010\n− 0110\n──────\n  <b>0100</b></div><p><span class="ltr num">10 − 6 = 4 ✓</span></p>`,{c:'green'})])}
+ ${callout('لما تحتاج تستلف: بتاخد 1 من الخانة اللي على الشمال، فتبقى 2 (10) في الخانة اللي عندك.','')}`,
+ note:'الاستعارة Borrow: واحد من اليسار = اتنين عندي.'});
+
+Q({sec:'teach',min:'38 – 39',quick:true,tag:'سؤال سريع · '+L(6,5),level:'easy',
+ q:`ناتج ${'1010 + 0011'} في النظام الثنائي =`,
+ opts:['1101','1011','1110','1001'],ans:0,
+ why:'10 + 3 = 13 = <b>1101</b>. وبالخانات: 0+1=1، 1+1=10 (اكتب 0 وCarry 1)، 0+0+1=1، 1+0=1.',
+ mistake:'نسيان الـ Carry.',lesson:L(6,5),note:'سريع.'});
+
+/* ====== 39–50 تدريب ====== */
+add({sec:'prac',min:'39 – 40',type:'divider',tag:'تدريب',title:'وقت التدريب',html:`
+ ${MARK.replace('class="mark"','class="mark" style="width:110px;height:110px"')}
+ <h1>أسئلة متنوعة على كل المنهج</h1>
+ <div class="sub">اختيار من متعدد · صح وخطأ مع التصحيح · تطبيق · تمييز بين المفاهيم</div>
+ <div class="lead mut">اختار إجابتك الأول، وبعدين نتأكد سوا.</div>`,
+ note:'اطلب من الطلاب يجاوبوا على الورق أولًا، وبعدين أظهر الإجابة.'});
+
+Q({sec:'prac',min:'40 – 50',tag:'تدريب 1',level:'easy',q:'أي مما يلي ينتمي لـ <b>وسائط التسجيل</b>؟',
+ opts:['التلفزيون','الصورة','محرك أقراص USB','الإنترنت'],ans:2,
+ why:'USB وDVD والورق والتخزين السحابي = وسائط تسجيل وتخزين. التلفزيون والإنترنت = نقل/إرسال. الصورة = تعبير.',
+ mistake:'خلط وسائط النقل بوسائط التسجيل.',lesson:L(1,1),note:''});
+Q({sec:'prac',min:'40 – 50',tag:'تدريب 2',level:'easy',q:'صح ولا غلط؟ <b>«المعلومات الثانوية هي اللي بنحصل عليها بأنفسنا من التجارب والاستبيانات»</b>',
+ opts:['صح','غلط'],tf:true,ans:1,
+ why:'<b>التصحيح:</b> دي المعلومات <b>الأولية</b>. الثانوية بنحصل عليها من طرف ثالث (كتب، صحف، تلفزيون).',
+ mistake:'الخلط بين أولية وثانوية.',lesson:L(1,1),note:''});
+Q({sec:'prac',min:'40 – 50',tag:'تدريب 3',level:'mid',q:'صح ولا غلط؟ <b>«لو مفيش قانون بيمنع تصرفًا معينًا على النت، يبقى مفيش أي مشكلة أخلاقية فيه»</b>',
+ opts:['صح','غلط'],tf:true,ans:1,
+ why:'<b>التصحيح:</b> أخلاقيات المعلومات مفاهيم وتوجهات أساسية بنلتزم بها <b>بغض النظر عن وجود قوانين</b>.',
+ mistake:'الربط بين الأخلاق والقانون فقط.',lesson:L(1,2),note:''});
+Q({sec:'prac',min:'40 – 50',tag:'تدريب 4',level:'mid',q:'تطبيق بيعالج بيانات المستخدم ويكمل الخدمة طول ما المستخدم ما اعترضش صراحةً. ده نظام…',
+ opts:['الموافقة المسبقة','الاعتراض','سياسة الخصوصية','ترخيص مركز حماية البيانات'],ans:1,
+ why:'نظام <b>الاعتراض</b>: الخدمة تستمر ما لم يُبد المستخدم اعتراضًا صريحًا. الموافقة المسبقة تشترط موافقة <b>قبل</b> الجمع.',
+ mistake:'خلط الموافقة المسبقة بالاعتراض.',lesson:L(2,1),note:''});
+Q({sec:'prac',min:'40 – 50',tag:'تدريب 5',level:'mid',q:'سجّلت طلب براءة اختراع لجهاز جديد سنة 2026. هتفضل محمية لحد سنة…',
+ opts:['2033','2036','2046','2076'],ans:2,
+ why:'براءة الاختراع = <b>20 سنة</b> من تاريخ التقديم → 2046. (2033 = 7 سنوات نموذج منفعة، 2036 = 10 سنوات).',
+ mistake:'الخلط بين مدد الحماية.',lesson:L(2,2),note:''});
+Q({sec:'prac',min:'40 – 50',tag:'تدريب 6',level:'mid',q:'رسّام عايز الناس تستخدم رسمته بشرط يذكروا اسمه وما يستخدموهاش تجاريًا. يختار ترخيص…',
+ opts:['BY فقط','BY + NC','NC + ND','SA + ND'],ans:1,
+ why:'<b>BY</b> = الإشارة لفضل المبدع، <b>NC</b> = غير تجاري.',mistake:'نسيان إن NC لوحدها ما بتشترط ذكر الاسم.',lesson:L(2,3),note:''});
+Q({sec:'prac',min:'40 – 50',tag:'تدريب 7',level:'mid',q:'ملف درجات اتعدّل سرًا من شخص غير مصرح له. أي عنصر من عناصر أمن المعلومات اتضرر؟',
+ opts:['السرية','السلامة','التوافرية','المصادقة'],ans:1,
+ why:'العبث بالمعلومات وتعديلها يضرب <b>السلامة (Integrity)</b>.',mistake:'اختيار السرية لأن الشخص غير مصرح له.',lesson:L(3,1),note:''});
+Q({sec:'prac',min:'40 – 50',tag:'تدريب 8',level:'mid',q:'برنامج بيتنكر في شكل برنامج شرعي، وبيفتح الباب لهجمات من غير ما حد يحس. ده…',
+ opts:['الدودة','حصان طروادة','برنامج الفدية','مسجل لوحة المفاتيح'],ans:1,
+ why:'<b>حصان طروادة</b> يتنكر كبرنامج شرعي. الدودة تنسخ نفسها وتنتشر.',mistake:'الخلط بين الدودة والحصان.',lesson:L(3,1),note:''});
+Q({sec:'prac',min:'40 – 50',type:'calc',tag:'تدريب 9',level:'mid',q:'رمز PIN مكوّن من <b>4 أرقام</b> (من 0 إلى 9). كام تركيبة مختلفة ممكنة؟ (اكتب الناتج كرقم)',
+ ans:['10000'],show:'10,000',
+ why:'كل خانة فيها 10 احتمالات → 10×10×10×10 = 10<sup>4</sup> = <b>10,000</b>.',mistake:'جمع 10+10+10+10 = 40 بدل الضرب.',lesson:L(3,2),note:''});
+Q({sec:'prac',min:'40 – 50',tag:'تدريب 10',level:'mid',q:'حد واقف وراك وبيتفرج على الشاشة وإنت بتكتب الـ PIN في ماكينة الـ ATM. ده…',
+ opts:['التصيّد (Phishing)','التزوير (Skimming)','التجسس المباشر (Shoulder surfing)','البحث في المهملات'],ans:2,
+ why:'التلصص على الشاشة/لوحة المفاتيح لسرقة PIN = <b>التجسس المباشر</b>. Skimming = نسخ بيانات الكارت بجهاز.',
+ mistake:'اختيار Skimming.',lesson:L(3,3),note:''});
+Q({sec:'prac',min:'40 – 50',type:'calc',tag:'تدريب 11',level:'easy',q:'كام <b>Byte</b> في <b>3 KB</b>؟',
+ ans:['3072'],show:'3,072',why:'3 × 1024 = <b>3072</b> Byte.',mistake:'استخدام 1000 بدل 1024 (يطلع 3000).',lesson:L(6,2),note:''});
+Q({sec:'prac',min:'40 – 50',tag:'تدريب 12',level:'mid',q:`قيمة ${'(10110)'}<sub>2</sub> بالنظام العشري هي…`,
+ opts:['22','26','20','44'],ans:0,
+ why:'1×16 + 0×8 + 1×4 + 1×2 + 0×1 = 16+4+2 = <b>22</b>.',mistake:'عكس ترتيب الخانات.',lesson:L(6,2),note:''});
+Q({sec:'prac',min:'40 – 50',tag:'تدريب 13',level:'mid',q:`الرقم ${'(3C)'}<sub>16</sub> يساوي بالنظام الثنائي…`,
+ opts:['00111100','11000011','00110011','11001100'],ans:0,
+ why:'3 = 0011 ، C = 1100 → <b>00111100</b>.',mistake:'عكس ترتيب المجموعتين.',lesson:L(6,3),note:''});
+Q({sec:'prac',min:'40 – 50',type:'calc',tag:'تدريب 14',level:'easy',q:'كام <b>Byte</b> يلزم لتخزين كلمة <b class="ltr">Egypt</b> بنظام ASCII؟',
+ ans:['5'],show:'5',why:'5 حروف × 1 Byte لكل حرف في ASCII = <b>5 Byte</b>.',mistake:'ضرب في 8 وإعطاء الناتج بالـ bit (40) رغم إن السؤال عن Byte.',lesson:L(6,4),note:''});
+Q({sec:'prac',min:'40 – 50',tag:'تدريب 15',level:'hard',q:`ناتج الطرح ${'1100 − 0101'} في النظام الثنائي =`,
+ opts:['0111','1001','0101','1011'],ans:0,
+ why:'12 − 5 = 7 = <b>0111</b> (مع الاستعارة في الخانات).',mistake:'تجاهل الاستعارة (Borrow).',lesson:L(6,5),note:''});
+
+/* ====== 50–57 تحدي التفكير ====== */
+add({sec:'chal',min:'50 – 51',type:'divider',tag:'تحدي',title:'تحدي التفكير',html:`
+ ${MARK.replace('class="mark"','class="mark" style="width:110px;height:110px"')}
+ <h1>مش كفاية تختار… لازم تفسّر ليه</h1>
+ <div class="sub">أسئلة بتربط بين أكتر من درس</div>
+ <div class="lead mut">اطلب من طالب يشرح سبب إجابته قبل ما تظهر الحل.</div>`,
+ note:'في التحدي، اسأل «ليه؟» بعد كل إجابة.'});
+Q({sec:'chal',min:'51 – 57',tag:'تحدي 1',level:'hard',q:'وصلتك معلومة عن «تأجيل الامتحانات» من حساب مجهول، وكل اللي حواليك بيعيدوا نشرها. التصرف الأفضل؟',
+ opts:['أشاركها فورًا لأن الكل بيشاركها','أتحقق من مصدر رسمي ومن مصادر تانية (تحقق متبادل) قبل ما أنشر','أنشرها وأحذفها لو طلعت غلط','أنشرها من غير ذكر اسمي'],ans:1,
+ why:'ممكن تكون <b>شائعة أو معلومة مضللة</b>. التصرف السليم: <b>التحقق المتبادل</b> ومراجعة المصدر قبل النشر.',
+ mistake:'الانسياق ورا الانتشار: المعلومات بتنتشر وتستمر حتى لو اتحذفت.',lesson:L(1,1)+' + '+L(1,2),note:'اربط: الانتشار + الاستمرارية + الأخلاقيات.'});
+Q({sec:'chal',min:'51 – 57',tag:'تحدي 2',level:'hard',q:'شركة حطّت صورة لاعب مشهور على علب منتجها بدون إذنه. أي حقوق اتنتهكت؟',
+ opts:['حقوق الصورة فقط','حقوق الدعاية فقط','حقوق الصورة وحقوق الدعاية معًا','لا شيء لأن الصورة منشورة على الإنترنت'],ans:2,
+ why:'استخدام صورته دون إذنه ينتهك <b>حقوق الصورة</b>، واستغلال شهرته تجاريًا ينتهك <b>حقوق الدعاية</b> (المصلحة الاقتصادية).',
+ mistake:'الاعتقاد إن نشر الصورة على النت يبيح استخدامها.',lesson:L(2,1),note:''});
+Q({sec:'chal',min:'51 – 57',tag:'تحدي 3',level:'hard',q:'موظف بيكتب كلمات المرور على ورقة لاصقة على شاشته، ورمى ورق قديم فيه بيانات حسابات في الزبالة من غير تمزيق. إيه الخطرين؟',
+ opts:['التجسس المباشر + البحث في المهملات','التصيّد + التزوير','الدودة + حصان طروادة','الفدية + مسجل لوحة المفاتيح'],ans:0,
+ why:'الورقة اللاصقة يتجسس عليها مباشرة (<b>Shoulder surfing</b>)، والورق المرمي ممكن حد يدور فيه (<b>Dumpster diving</b>) — الاتنين من الهندسة الاجتماعية.',
+ mistake:'التفكير في البرمجيات الخبيثة بدل السلوك البشري.',lesson:L(3,2)+' + '+L(3,3),note:''});
+Q({sec:'chal',min:'51 – 57',type:'calc',tag:'تحدي 4',level:'hard',q:'كلمة مرور من أرقام فقط (0–9): كام مرة بتزيد التركيبات لما الطول يزيد من <b>4 أرقام إلى 6 أرقام</b>؟',
+ ans:['100'],show:'100 مرة',
+ why:'4 أرقام = 10<sup>4</sup> ، 6 أرقام = 10<sup>6</sup> → النسبة = 10<sup>2</sup> = <b>100</b>. كل رقم جديد يضرب العدد في 10.',
+ mistake:'إجابة «مرتين» لأن 6 تقريبًا ضعف 4.',lesson:L(3,2),note:'اربطها بنمط الأسس.'});
+Q({sec:'chal',min:'51 – 57',type:'calc',tag:'تحدي 5',level:'hard',q:'كام <b>bit</b> على الأقل مطلوب لتمثيل <b>20</b> حالة مختلفة؟',
+ ans:['5'],show:'5 bit',
+ why:'2<sup>4</sup> = 16 (مش كفاية) ، 2<sup>5</sup> = 32 (تكفي) → <b>5 bit</b>.',mistake:'اختيار 4 لأنها قريبة من 20، أو 10 (20÷2).',lesson:L(6,2),note:''});
+Q({sec:'chal',min:'51 – 57',tag:'تحدي 6',level:'hard',q:'الرمز الثنائي <span class="ltr num">01000011</span> يمثل حرفًا في ASCII. قيمته بالنظام السادس عشر والحرف هما…',
+ opts:['43 (Hex) والحرف C','43 (Hex) والحرف c','34 (Hex) والحرف 4','C3 (Hex) والحرف C'],ans:0,
+ why:'0100 = 4 ، 0011 = 3 → <b>43</b> ، وفي جدول ASCII العمود 4 والصف 3 = <b>C</b> (كبيرة).',
+ mistake:'الخلط بين الحرف الكبير (العمود 4) والصغير (العمود 6).',lesson:L(6,3)+' + '+L(6,4),note:''});
+Q({sec:'chal',min:'51 – 57',tag:'تحدي 7',level:'hard',q:`ناتج ${'0111 + 0001'} هو… ولماذا ظهر 1 في أقصى اليسار؟`,
+ opts:['1000 — بسبب سلسلة الـ Carry','0112','1111','0110'],ans:0,
+ why:'7 + 1 = 8 = <b>1000</b>. كل 1+1 بينتج Carry بيتنقل للخانة الأعلى لحد ما يوصل لأقصى اليسار.',
+ mistake:'كتابة 2 في خانة واحدة (0112) — الخانة الثنائية 0 أو 1 فقط.',lesson:L(6,5),note:''});
+
+/* ====== 57–60 الختام ====== */
+add({sec:'close',min:'57 – 58',tag:'الختام',title:'أهم الأفكار في سطر لكل وحدة',cls:'sm',html:`
+ ${grid(2,[
+  card('الوحدة 1','البيانات ← المعلومات ← المعرفة · الاستمرارية والتكرار والانتشار · أولية/ثانوية · الوسائط الثلاثة · الأخلاقيات بغض النظر عن القانون.'),
+  card('الوحدة 2','البيانات الشخصية (أساسية/أرقام هوية/حساسة) · الخصوصية والصورة والدعاية · الملكية الصناعية (تسجيل) × المؤلف (بدون تسجيل) · الاقتباس والمشاع الإبداعي.',{c:'green'}),
+  card('الوحدة 3','السرية والسلامة والتوافرية · البرمجيات الخبيثة · كلمة المرور والمصادقة · التصيّد والهندسة الاجتماعية.',{c:'red'}),
+  card('الوحدة 6','bit/Byte و 1024 · ثنائي ↔ عشري · Hex (4 bit) · ASCII/Unicode · جمع وطرح ثنائي.',{c:'violet'})])}`,
+ note:'لخّص بسرعة. اسأل: أصعب جزء كان إيه؟'});
+
+add({sec:'close',min:'57 – 58',tag:'الختام',title:'الأخطاء الشائعة — خلي بالك!',cls:'xs',html:`
+ ${grid(2,[
+  card('','• الخلط بين <b>الانتشار</b> و<b>قابلية التكرار</b>.'),
+  card('','• الخلط بين المعلومات <b>الأولية</b> والثانوية.',{c:'green'}),
+  card('','• نسيان إن <b>الأخلاقيات</b> تسري حتى بدون قانون.',{c:'amber'}),
+  card('','• الخلط بين <b>الموافقة المسبقة</b> و<b>الاعتراض</b>.',{c:'red'}),
+  card('','• نسيان إن <b>الملكية الصناعية</b> تحتاج تسجيل وحق المؤلف لا.',{c:'violet'}),
+  card('','• الخلط بين <b>الدودة</b> (تنسخ نفسها) و<b>حصان طروادة</b> (يتنكر).'),
+  card('','• الخلط بين <b>Two-factor</b> (عاملين مختلفين) و<b>Two-step</b> (نفس النوع).',{c:'green'}),
+  card('','• <b>1 KB = 1024 B</b> مش 1000 · ترتيب البواقي · <b>Carry/Borrow</b>.',{c:'amber'})])}`,
+ note:'مر على الأخطاء وخلّي الطلاب يختاروا اللي هم بيقعوا فيه.'});
+
+add({sec:'close',min:'58 – 59',type:'rapid',tag:'سؤال ختامي شامل',title:'مراجعة سريعة: صح ولا غلط؟',
+ items:[
+  {s:'نسخ أسطوانة موسيقى تجارية وتوزيعها على أصحابك مسموح لأنها للاستخدام الشخصي.',t:false,why:'انتهاك لحقوق المؤلف؛ الاستخدام الشخصي لا يبيح التوزيع.'},
+  {s:'رسالة من «بنك» فيها رابط وبتطلب الـ PIN = تصيّد (Phishing).',t:true,why:'احتيال بتزييف مؤسسة مالية لسرقة PIN وتفاصيل الحساب.'},
+  {s:'1 KB = 1000 Byte.',t:false,why:'1 KB = 1024 B.'},
+  {s:'العلامة التجارية بتتحمى 10 سنوات من التسجيل وبتتجدد.',t:true,why:'ملكية صناعية: لازم تسجيل (مبدأ الشكلية).'},
+  {s:'المصادقة بالبصمة هي مصادقة قائمة على الحيازة.',t:false,why:'دي مصادقة بيومترية.'},
+  {s:'الرمز A في النظام السادس عشر = 10 عشري = 1010 ثنائي.',t:true,why:'A=10 و10=1010.'},
+  {s:'حقوق المؤلف لازم تتسجل عشان تتحمى.',t:false,why:'تتبع مبدأ عدم التسجيل: بتنشأ لحظة إنشاء العمل.'},
+  {s:'الدودة برنامج بينسخ نفسه وينتشر عبر الشبكات.',t:true,why:'عكس حصان طروادة الذي يتنكر.'}],
+ note:'اضغط على أي جملة لتظهر الإجابة أو اضغط A لإظهار الكل. نفس فكرة سؤال الافتتاح: التصيّد.'});
+
+add({sec:'close',min:'59 – 60',type:'hero',title:'بالتوفيق',html:`
+ ${MARK}<div class="brand">MZ TECHNOLOGY</div>
+ <h1>بالتوفيق في امتحان أكتوبر</h1>
+ <div class="sub">ذاكر · راجع · افهم — ومتخافش من الأسئلة</div>
+ <div class="by">BY <b>MR. MAZEN MOHAMED</b></div>`,
+ note:'اختم بدعاء بالتوفيق وفتح باب الأسئلة.'});
+
+/* ====== ملحق: نماذج الامتحان الاسترشادية ====== */
+const BK='نموذج استرشادي';
+add({sec:'bank',type:'divider',tag:'ملحق إضافي',title:'نماذج الامتحان الاسترشادية',html:`
+ ${MARK.replace('class="mark"','class="mark" style="width:110px;height:110px"')}
+ <h1>نماذج الامتحان الاسترشادية</h1>
+ <div class="sub">15 عبارة صح وخطأ · 21 سؤال اختيار من متعدد · 19 سؤال مقالي بإجاباتها</div>
+ <div class="lead mut">ملحق إضافي خارج الـ 60 دقيقة — كله من المنهج المقرر.</div>`});
+
+const TF=[
+ ['البيانات هي الحقائق الخام الممثلة بأرقام أو حروف أو رموز.',true,'تعريف البيانات (Data).'],
+ ['من خصائص المعلومات أنها تختفي تمامًا بعد نشرها على الإنترنت.',false,'المعلومات تتميز بـ<b>الاستمرارية</b>: لا يمكن محوها بالكامل بعد النشر.'],
+ ['المعلومات الثانوية يتم الحصول عليها من طرف ثالث مثل الكتب والصحف.',true,'الثانوية من طرف ثالث، والأولية من التجربة الشخصية.'],
+ ['من أمثلة وسائط التعبير: النصوص، الصور، الفيديو.',true,'وسائط التعبير: نص · صورة · صوت · فيديو.'],
+ ['الثقافة الإعلامية تعني القدرة على تفسير المعلومات من الوسائط بدقة.',true,'تعريف الثقافة الإعلامية (Media literacy).'],
+ ['من أخلاقيات المعلومات احترام حقوق النشر والخصوصية.',true,'من نقاط مراعاتها عند نشر المعلومات.'],
+ ['إدمان الإنترنت واستخدام الهاتف أثناء المشي من المشكلات المرتبطة بالهواتف الذكية.',true,'من مشاكل الهواتف الذكية ووسائل التواصل الاجتماعي.'],
+ ['من البيانات الشخصية الحساسة: العرق والديانة والحالة الصحية.',true,'من البيانات الحساسة التي تحتاج عناية خاصة.'],
+ ['سياسة الخصوصية في الشركات تهدف إلى توضيح كيفية جمع وحماية بيانات العملاء.',true,'تعريف سياسة الخصوصية (Privacy policy).'],
+ ['تقسم حقوق الملكية الفكرية إلى حقوق ملكية صناعية وحقوق نشر.',true,'(مع الحقوق المجاورة لحقوق المؤلف).'],
+ ['من العناصر الأساسية لأمن المعلومات: السرية والسلامة والتوافر.',true,'Confidentiality · Integrity · Availability.'],
+ ['من حقوق الملكية الصناعية: براءات الاختراع والعلامات التجارية.',true,'وكذلك نموذج المنفعة والرسوم والنماذج الصناعية.'],
+ ['برامج الفدية تُستخدم لحماية البيانات ومنع الفقد.',false,'برامج الفدية <b>برمجيات خبيثة</b> تجعل البيانات غير قابلة للوصول وتطلب فدية.'],
+ ['هجوم التصيد Phishing يعتمد دائمًا على استغلال الثغرات البرمجية في أنظمة التشغيل بدون التواصل مع المستخدم.',false,'التصيد يعتمد على <b>الخداع</b> بمواقع وبريد مزيف يتواصل مع المستخدم لسرقة PIN وبيانات الحساب.'],
+ ['يمكن استخدام برمجيات الفدية كوسيلة آمنة لتشغيل البرامج الموثوقة على جهاز الحاسب.',false,'برمجيات الفدية ضارة وليست وسيلة آمنة.']];
+for(let g=0;g<3;g++){
+ add({sec:'bank',type:'rapid',tag:`${BK} · صح أم خطأ (${g*5+1}–${g*5+5})`,title:'ضع صح أو غلط — اضغط على العبارة للإجابة',
+  items:TF.slice(g*5,g*5+5).map((x,k)=>({s:`${g*5+k+1}) ${x[0]}`,t:x[1],why:x[2]}))});
+}
+const MC=[
+ ['أي مما يلي يُمثل «المعلومات»؟',['الحقائق الخام','ما يحمل معنى أو قيمة للمتلقي','رموز غير مفهومة','أرقام فقط'],1,'المعلومات هي بيانات لها معنى أو قيمة للمتلقي وتُستخدم في اتخاذ القرار.',L(1,1)],
+ ['المعرفة تعني:',['نسخ المعلومات','تحليل وتنظيم المعلومات لحل المشكلات','البيانات الخام','الشائعات'],1,'المعرفة معلومات تم تحليلها وتنظيمها بشكل منهجي للمساعدة في حل المشكلات.',L(1,1)],
+ ['أي من التالي يُعتبر مصدرًا للمعلومات الأولية؟',['كتاب مدرسي','تقرير تجربة شخصية','صحيفة يومية','برنامج تلفزيوني'],1,'الأولية نحصل عليها بأنفسنا من التجارب والبحث؛ الباقي من طرف ثالث.',L(1,1)],
+ ['وسائط النقل أو الإرسال تتضمن:',['أقراص DVD','التلفزيون والراديو','النصوص والصور','التخزين السحابي'],1,'DVD والتخزين السحابي = تسجيل، والنصوص والصور = تعبير.',L(1,1)],
+ ['أي من النقاط التالية يُعد انتهاكًا لأخلاقيات المعلومات؟',['التحقق من المصادر','نشر صور محمية بحقوق نشر دون إذن','احترام الخصوصية','عدم التنمر الإلكتروني'],1,'لا يجوز مشاركة الصور والمقاطع المحمية بحقوق المؤلف دون إذن.',L(1,2)],
+ ['أي من المشكلات التالية يُعتبر انتحال هوية؟',['مشاركة فيديو','ادعاء شخصية شخص آخر لسرقة الحسابات','استخدام الهاتف أثناء المشي','نشر إشاعة'],1,'انتحال الشخصية: شخص ينتحل شخصية فرد أو مؤسسة لسرقة هويات وكلمات مرور.',L(1,2)],
+ ['أي من البيانات التالية يُعتبر بيانات أساسية؟',['رقم البطاقة القومي','بصمة العين','تاريخ الميلاد','الحالة الصحية'],2,'الأساسية: الاسم، العنوان، تاريخ الميلاد، النوع. الرقم القومي = رقم هوية، والصحة = حساسة.',L(2,1)],
+ ['أي من الحقوق التالية يحمي المصالح الاقتصادية للمشاهير؟',['حق الخصوصية','حقوق الصورة','حقوق الدعاية','حقوق النشر'],2,'حقوق الدعاية تحمي مصالح المشاهير الاقتصادية في استغلال صورهم وسمعتهم تجاريًا.',L(2,1)],
+ ['الترخيص الذي تحصل عليه الشركات من الجهة المنظمة للتأكد من التزامها بحماية البيانات يُسمى:',['نظام الاعتراض','سياسة الخصوصية','ترخيص مركز حماية البيانات الشخصية','نظام الموافقة المسبقة'],2,'ترخيص يمنحه مركز حماية البيانات الشخصية للتأكد من التزام الشركات بالقانون.',L(2,1)],
+ ['فترة حماية براءات الاختراع هي:',['7 سنوات','10 سنوات','20 سنة','50 سنة'],2,'20 سنة من تاريخ التقديم. (7 = نموذج المنفعة، 10 = العلامة/التصميم، 50 = بعد وفاة المؤلف).',L(2,2)],
+ ['الغرض من حقوق النشر يتمثل في:',['ضمان الاستخدام العادل وحماية الحقوق','منع جميع أشكال الاقتباس','السماح بالتعدي على حقوق الملكية الفكرية','استخدام الأعمال لأغراض تجارية فقط'],0,'تهدف حقوق المؤلف للمساهمة في التطور الثقافي عبر الاستخدام العادل وحماية الحقوق.',L(2,3)],
+ ['أي من تراخيص المشاع الإبداعي يسمح باستخدام العمل بشرط ذكر اسم المؤلف؟',['غير تجاري (NC)','لا مشتقات (ND)','نسبة الفضل للمبدع (BY)','نفس الشروط للتعديلات (SA)'],2,'BY: اعرض عنوان العمل واسم المؤلف.',L(2,3)],
+ ['أي من التهديدات التالية يقوم بجمع المعلومات الشخصية دون علم المستخدم؟',['برامج الفدية','برامج التجسس','الفيروسات','حصان طروادة'],1,'برنامج التجسس (Spyware) يجمع المعلومات الشخصية دون علم المستخدم ويرسلها لطرف ثالث.',L(3,1)],
+ ['أي من التقنيات التالية يُطبّق مبدأ «شيء تعرفه وشيء تملكه» لتعزيز أمان الحسابات؟',['برامج مكافحة الفيروسات','المصادقة ثنائية العوامل 2FA','جدار الحماية Firewall','نظام التشفير التناظري'],1,'كلمة المرور (معرفة) + رمز على الهاتف (حيازة) = مصادقة ثنائية بعاملين مختلفين.',L(3,2)],
+ ['أصغر وحدة لقياس البيانات داخل الحاسب الآلي وتأخذ القيمة 0 أو 1 هي:',['البايت (Byte)','البت (Bit)','الكيلوبايت (KB)','الميجابايت (MB)'],1,'البت (bit) أصغر وحدة، والبايت = 8 bit.',L(6,2)],
+ ['الترتيب التصاعدي الصحيح لوحدات قياس البيانات هو:',['TB > GB > MB > KB > Byte > Bit','TB > MB > GB > KB > Bit > Byte','Bit > Byte > KB > MB > GB > TB','TB > GB > Bit > Byte > MB > KB'],2,'التصاعدي = من الأصغر للأكبر: Bit ثم Byte ثم KB ثم MB ثم GB ثم TB. (الخيار أ ترتيب تنازلي).',L(6,2)],
+ ['أي مما يلي يستوعب أنظمة الكتابة للبلدان في جميع أنحاء العالم؟',['ASCII','Unicode','Font','Character Code'],1,'Unicode معيار يجمع أحرف جميع أنحاء العالم في رمز واحد.',L(6,4)],
+ ['أي مما يلي يمثل بيانات شكل الأحرف المقابلة لرموز الأحرف؟',['ASCII','Unicode','Font','Encoding'],2,'الخط (Font) هو بيانات شكل الأحرف المقابلة لرموزها.',L(6,4)],
+ ['عدد الأحرف التي يمكن تمثيلها باستخدام 1 Byte دون استخدام تقنيات خاصة هو:',['64','128','256','512'],2,'1 Byte = 8 bit = 2<sup>8</sup> = 256.',L(6,2)],
+ ['أي من الآتي يختص فقط بالأحرف الأبجدية الرقمية الإنجليزية والرموز وأحرف التحكم؟',['ASCII','Unicode','Font','Encoding'],0,'ASCII للغة الإنجليزية فقط ولا يدعم لغات أخرى.',L(6,4)]];
+MC.push(['ما هو المصطلح المستخدم لتحويل سلسلة نصية إلى رموز الحروف؟',['Decoding','Encoding','Font','Corruption'],1,'Encoding: تمثيل سلسلة نصية برموز الأحرف. عكسه Decoding.',L(6,4)]);
+MC.forEach((m,i)=>Q({sec:'bank',tag:`${BK} · اختيار من متعدد (${i+1}/21)`,level:'mid',q:m[0],opts:m[1],ans:m[2],why:m[3],lesson:m[4]}));
+
+const ES=[
+ ['علّل: عدم اشتراط مبدأ التسجيل لثبوت حقوق النشر عكس بعض حقوق الملكية الصناعية. (وناقش مبدأ ثبوت حقوق النشر لحظة إنشاء العمل)',
+  'لأنه يتم إنشاء الحقوق في <b>لحظة إنشاء العمل</b>. حقوق النشر هي حقوق للأنشطة الإبداعية في الفنون (روايات، أفلام، لوحات، برامج كمبيوتر) محمية قانونًا، وتتبع مبدأ <b>عدم التسجيل</b> بغض النظر عن كون المؤلف هاويًا أو قاصرًا.',L(2,2)],
+ ['قارن بين حقوق النشر والحقوق المجاورة، موضحًا الأمثلة لكل منهما (مثل المطربين والممثلين).',
+  tbl(['وجه المقارنة','حقوق النشر','الحقوق المجاورة'],[['التعريف','حقوق تتعلق بالأنشطة الإبداعية في الفنون، محمية قانونًا بموجب قانون حماية الملكية الفكرية','حقوق تُمنح للمؤدين ومنتجي التسجيلات وهيئات الإذاعة لارتباطهم باستغلال المصنفات'],['الأمثلة','الروايات والأفلام واللوحات الفنية والصور الفوتوغرافية والموسيقى وبرامج الكمبيوتر','المؤدون مثل المطربين والمخرجين والممثلين، وشركات التسجيل ومنظمات البث']]),L(2,2)],
+ ['اشرح كيفية تكامل العناصر الأساسية لأمن المعلومات: السرية، السلامة، التوافر لحماية البيانات.',
+  '<b>السرية:</b> الحالة التي يمكن فيها فقط للأفراد المصرّح لهم الوصول إلى المعلومات.<br><b>السلامة:</b> الحالة التي لم يتم فيها تدمير المعلومات أو العبث بها أو محوها.<br><b>التوافرية:</b> الحالة التي يمكن فيها الوصول إلى المعلومات في أي وقت عند الحاجة.',L(3,1)],
+ ['وضّح طبيعة وآلية انتشار برمجيات «الدودة» (Worm) وما تعتمد عليه للانتشار عبر الإنترنت.',
+  'برمجيات الدودة برنامج <b>ينسخ نفسه وينتشر عبر الإنترنت</b> مثل الدودة، مما يؤدي إلى توسيع نطاق الإصابة.',L(3,1)],
+ ['وضّح الفارق الأساسي بين براءات الاختراع والعلامات التجارية كأحد عناصر الملكية الصناعية.',
+  tbl(['وجه المقارنة','براءة الاختراع','العلامة التجارية'],[['الموضوع','تحمي الاختراعات التقنية الجديدة القابلة للتطبيق الصناعي','إشارة يمكن إدراكها بالبصر وتُستخدم لتمييز منتجات أو خدمات عن غيرها (أسماء، كلمات، حروف، أرقام، رسوم، رموز، صور، ألوان…)'],['مدة الحماية','20 سنة من تاريخ التقديم','10 سنوات من تاريخ التسجيل (وتحديثها)']]),L(2,2)],
+ ['ناقش أهمية ترخيص المشاع الإبداعي من النوع (BY) بالنسبة للمبدعين والمستخدمين.',
+  'حيث إنه <b>يشير إلى فضل المبدع</b> ويتم فيه عرض عنوان العمل واسم المؤلف.',L(2,3)],
+ ['اشرح صور الجرائم التي تعتمد على استخدام اسم مستخدم أو كلمة مرور لشخص آخر وانتهاك قانون الوصول غير المصرح به. (أو: اشرح صور الانتهاكات الناتجة عن الوصول غير المصرح به باستخدام بيانات الاعتماد للغير وآثارها على أمن البيانات المخزنة)',
+  '<b>أ) التصيّد:</b> احتيال يستخدم مواقع ويب مزيفة متنكرة على أنها مؤسسات مالية أو هيئات عامة لسرقة المعلومات الشخصية مثل رموز PIN أو تفاصيل الحساب.<br><b>ب) الهندسة الاجتماعية:</b> الحصول على المعلومات بشكل احتيالي عن طريق استغلال علم النفس البشري أو الإهمال أو قلة الوعي.<br><b>ج) انتحال الشخصية:</b> التظاهر بأنك شخص آخر، مثل إجراء مكالمة هاتفية باسم الشخص الآخر، للحصول على معلومات.<br><b>د) التجسس المباشر:</b> التلصص على الشاشة أو لوحة المفاتيح لسرقة كلمات المرور أو رموز PIN.<br><b>هـ) التزوير:</b> استخراج بيانات بطاقة ائتمان أو خصم لشخص ما بشكل غير قانوني واستخدامها لإنشاء بطاقة مزورة.',L(3,3)],
+ ['وضّح المخاطر الناجمة عن برامج الفدية وكيفية مواجهتها لحماية البيانات من التلف أو الابتزاز. (أو: عرّف برمجيات الفدية Ransomware واذكر الخطوات المفترض اتباعها للحد من مخاطرها قبل وقوع الاختراق)',
+  '<b>الخطر:</b> جعل البيانات غير قابلة للوصول ومطالبة المستخدم بفدية لاستعادة الوصول إليها.<br><b>المواجهة:</b> استخدام برامج مكافحة الفيروسات، والنسخ الاحتياطي للبيانات، وتحديث نظام التشغيل والبرامج، وكلمات المرور القوية والمصادقة.',L(3,1)+' + '+L(3,2)],
+ ['قارن بين «حقوق التصميم» و«حقوق نموذج المنفعة» من حيث الشكل والهيكل الخارجي للمنتج وفائدته. (أو: ناقش كيفية التمييز بين الحقوق التي تحمي الشكل والجماليات والحقوق التي تحمي الابتكار التقني)',
+  tbl(['وجه المقارنة','موضوع الحق','مدة الحماية'],[['حقوق التصميم','تحمي المظهر الخارجي للمنتج: اللون – الخطوط – الأنماط – الشكل','10 سنوات (وتتجدد مرة كل 5 سنوات)'],['حقوق نموذج المنفعة','تحمي حلولًا تقنية بسيطة وتحسينات عملية قابلة للتطبيق الصناعي (أقل ابتكارًا من الاختراعات)','7 سنوات']]),L(2,2)],
+ ['علّل: امتداد فترة حماية حقوق النشر لمدى حياة المبدع بالإضافة إلى 50 سنة بعد وفاته.',
+  'لضمان حماية حقوق المؤلف.',L(2,2)],
+ ['قارن بين أهداف برامج التجسس وبرامج الفدية من حيث نوع التهديد الموجه للمستخدم والبيانات.',
+  tbl(['وجه المقارنة','برامج التجسس','برامج الفدية'],[['الهدف','تقوم بجمع المعلومات الشخصية دون علم المستخدم وترسلها إلى أطراف ثالثة','تجعل البيانات غير قابلة للوصول وتطالب بفدية لاستعادة الوصول إليها']]),L(3,1)],
+ ['وضّح مفهوم «الهندسة الاجتماعية» Social Engineering بصفة عامة، وكيف تستهدف العنصر البشري في الاختراق.',
+  'طريقة للحصول على المعلومات بشكل احتيالي عن طريق استغلال علم النفس البشري أو الإهمال أو قلة الوعي.',L(3,3)],
+ ['بيّن الدور الذي يلعبه النسخ الاحتياطي (Data Backup) في خطة التعافي من الكوارث والأخطار السيبرانية.',
+  'إنشاء نسخ من البيانات بحيث يمكن استخدامها عند فقدانها أو حدوث عطل.',L(3,2)],
+ ['حوّل العدد العشري 13 إلى ما يقابله في النظام الثنائي (Binary System) مع توضيح خطوات التحويل.',
+  `<div class="ltr num" style="line-height:1.7">13 ÷ 2 = 6 &nbsp; r <b>1</b><br>6 ÷ 2 = 3 &nbsp;&nbsp; r <b>0</b><br>3 ÷ 2 = 1 &nbsp;&nbsp; r <b>1</b><br>1 ÷ 2 = 0 &nbsp;&nbsp; r <b>1</b></div>اقرأ البواقي من الأخير للأول: <b>${B('1101')} = ${B('13',10)}</b>`,L(6,2)],
+ ['اكتب فقرة تقترح فيها خطة أمان شخصية لحماية حاسوبك المنزلي من الفيروسات والتهديدات السيبرانية بناءً على ما درست.',
+  'للحفاظ على أمان الحاسب المنزلي: <b>تثبيت برامج مكافحة الفيروسات</b> لإزالة الفيروسات أو عزلها، والاحتفاظ دائمًا ببرنامج نظام التشغيل وبرنامج التطبيق <b>محدّث</b> لمنع الثغرات الأمنية، مع إنشاء <b>نسخ احتياطية</b> بانتظام لاستعادتها عند حدوث مشكلة أو عطل، و<b>كلمات المرور القوية</b> والمصادقة.',L(3,2)],
+ ['اشرح خطوات التحويل من النظام الثنائي إلى النظام السادس عشر.',
+  '(أ) افصل الرقم الثنائي إلى مجموعات من <b>4 أرقام</b> من الأقل قيمة إلى الأعلى قيمة (من اليمين إلى اليسار).<br>(ب) حوّل كل مجموعة إلى قيمة ست عشرية.<br>(ج) رتّب هذه القيم بالتسلسل.',L(6,3)],
+ ['ما المقصود بكل من: (أ) <span class="ltr">Encoding</span> و(ب) <span class="ltr">Decoding</span>؟',
+  '<b>Encoding:</b> تمثيل سلسلة من الأحرف باستخدام رموز الحرف.<br><b>Decoding:</b> تحويل رموز الحرف إلى سلسلة الأحرف.',L(6,4)],
+ ['ما المقصود بظاهرة تلف الأحرف (Character Corruption)؟',
+  'ظاهرة تحدث بسبب عدم تطابق طرق الترميز وفك الترميز.',L(6,4)],
+ ['ما الفرق بين رمز الحرف (Character Code) والخط (Font)؟',
+  '<b>رمز الحرف:</b> قيمة رقمية فريدة يتم تعيينها لكل حرف أو رمز.<br><b>الخط:</b> بيانات شكل الأحرف المقابلة لرموز الأحرف.',L(6,4)],
+ ['عرّف النظام السادس عشر.',
+  'طريقة لتمثيل الأرقام باستخدام الأرقام من 0 إلى 9 وأحرف الأبجدية من A إلى F.',L(6,3)]];
+ES.forEach((x,i)=>add({sec:'bank',type:'essay',tag:`${BK} · أسئلة مقالية (${i+1}/${ES.length})`,q:x[0],a:x[1],lesson:'يقيس: '+x[2]}));
+
+</script>
+<script>/* ====== mobile engine ====== */
+const MZ=(()=>{
+const $=(s,r=document)=>r.querySelector(s);
+const stage=$('#stage'),slidesEl=$('#slides');
+const LET=['أ','ب','ج','د'];
+let cur=0;
+const st={};
+const strip=h=>String(h||'').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+
+function fit(){
+ const w=innerWidth,h=innerHeight;
+ const portrait=h>=w;
+ const s=Math.min(w/(portrait?440:780),1.4);
+ const W=w/s;
+ stage.style.width=W+'px';stage.style.height=(h/s)+'px';
+ stage.style.transform='scale('+s+')';
+ stage.classList.toggle('narrow',W<560);
+}
+addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,150));fit();
+
+const normNum=s=>String(s).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[,،\s]/g,'').toLowerCase().replace(/^0+(?=\d)/,'');
+
+function buildSlide(i){
+ const d=S[i];const el=document.createElement('div');el.className='slide';el.dataset.i=i;
+ let inner='';
+ if(d.type==='hero'||d.type==='divider'){
+  el.innerHTML=`<div class="body hero">${d.html}</div>`;return el;}
+ const tag=d.tag?`<div class="tag"><i></i>${d.tag}</div>`:'';
+ const rev=(t)=>`<button class="btn ghost revbtn" data-act="rev">${t}</button>`;
+ if(d.type==='essay'){
+  inner=`<div class="qmeta"><span class="badge b-mid">سؤال مقالي</span><span>${d.lesson}</span></div><div class="qtext">${d.q}</div>${rev('إظهار الإجابة')}<div class="expl" id="ex${i}"><div class="ans">الإجابة النموذجية</div><div>${d.a}</div></div>`;
+  el.innerHTML=`${tag}<div class="body">${inner}</div>`;return el;}
+ if(d.type==='q'||d.type==='calc'){
+  const lvl={easy:['سهل','b-easy'],mid:['متوسط','b-mid'],hard:['صعب','b-hard']}[d.level||'easy'];
+  const meta=`<div class="qmeta"><span class="badge ${lvl[1]}">${lvl[0]}</span><span>يقيس: ${d.lesson}</span></div>`;
+  let ans='';
+  if(d.type==='calc'){
+   ans=`<div class="calc"><input id="in${i}" inputmode="numeric" autocomplete="off" placeholder="اكتب الإجابة"><button class="btn" data-act="check">تحقق</button><span id="cf${i}" style="font-size:19px;font-weight:800"></span></div>`;
+  }else{
+   ans=`<div class="opts">${d.opts.map((o,k)=>`<button class="opt" data-k="${k}"><span class="k">${d.tf?(k?'✗':'✓'):LET[k]}</span><span>${o}</span></button>`).join('')}</div>`;
+  }
+  const correct=d.type==='calc'?d.show:`${d.tf?'':LET[d.ans]+') '}${d.opts[d.ans]}`;
+  inner=`${meta}<div class="qtext">${d.q}</div>${ans}${rev('إظهار الإجابة')}
+   <div class="expl" id="ex${i}"><div class="ans">الإجابة الصحيحة: ${correct}</div><div>${d.why||''}</div>${d.mistake?`<div class="mk">⚠ الخطأ الشائع: ${d.mistake}</div>`:''}<div class="ls">الدرس: ${d.lesson}</div></div>`;
+  el.innerHTML=`${tag}<div class="body">${inner}</div>`;return el;}
+ if(d.type==='rapid'){
+  inner=`<div class="rapid">${d.items.map((it,k)=>`<div class="rp" data-k="${k}"><div style="flex:1">${it.s}<div class="why">${it.why}</div></div><div class="res">اضغط</div></div>`).join('')}</div>${rev('إظهار الكل')}`;
+  el.innerHTML=`${tag}<h1 class="rh">${d.title}</h1><div class="body">${inner}</div>`;return el;}
+ el.innerHTML=`${tag}<h1>${d.title}</h1><div class="body">${d.html}</div>`;return el;
+}
+
+function initSlide(i,el){
+ const d=S[i];
+ if(d.init==='bits'){
+  const bits=el.querySelector('#bits');const f=el.querySelector('#bitsf');
+  const val=[0,0,0,1,0,1,1,1];
+  const draw=()=>{bits.innerHTML=val.map((v,k)=>`<div class="bit ${v?'on':''}" data-k="${k}"><div class="w">${2**(7-k)}</div><div class="v">${v}</div></div>`).join('');
+   const parts=[],tot=val.reduce((a,v,k)=>{if(v){parts.push(2**(7-k));return a+2**(7-k)}return a},0);
+   f.textContent=(parts.length?parts.join(' + '):'0')+' = '+tot;};
+  bits.addEventListener('click',e=>{const b=e.target.closest('.bit');if(!b)return;val[+b.dataset.k]^=1;draw();});
+  draw();}
+ if(d.type==='q'||d.type==='calc'||d.type==='rapid'||d.type==='essay'){
+  el.addEventListener('click',e=>{
+   const o=e.target.closest('.opt');if(o){choose(+o.dataset.k);return}
+   if(e.target.closest('[data-act=check]')){checkCalc();return}
+   if(e.target.closest('[data-act=rev]')){reveal();return}
+   const r=e.target.closest('.rp');if(r){toggleRp(r);return}
+  });
+  const inp=el.querySelector('input');if(inp)inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();checkCalc();}});
+ }
+ if(st[i])applyState(i,el);
+}
+
+function getEl(i){return slidesEl.querySelector(`.slide[data-i="${i}"]`)}
+const UNIT='(?:bit|Byte|KB|MB|GB|TB|B)';
+const RX=new RegExp('(?:=\\s*)?\\d[\\d,.]*\\s?'+UNIT+'\\b(?:\\s*[=×÷+\\-−]\\s*[\\d,.]+(?:\\s?'+UNIT+'\\b)?)*','g');
+function ltrFix(root){
+ const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const list=[];let n;
+ while(n=w.nextNode()){if(n.parentElement.closest('.ltr,script,style,input'))continue;RX.lastIndex=0;if(RX.test(n.nodeValue))list.push(n);}
+ list.forEach(t=>{const sp=document.createElement('span');sp.innerHTML=t.nodeValue.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(RX,m=>`<span class="ltr">${m}</span>`);t.replaceWith(...sp.childNodes);});
+}
+function ensure(i){let el=getEl(i);if(!el){el=buildSlide(i);ltrFix(el);slidesEl.appendChild(el);initSlide(i,el);}return el;}
+
+function applyState(i,el){
+ el=el||getEl(i);const d=S[i],s=st[i]||{};if(!el)return;
+ const rb=el.querySelector('.revbtn');
+ if(d.type==='q'){
+  el.querySelectorAll('.opt').forEach((b,k)=>{b.classList.remove('right','wrong','dim');
+   if(s.chosen!=null||s.rev){if(k===d.ans)b.classList.add('right');else if(k===s.chosen)b.classList.add('wrong');else b.classList.add('dim');}});
+  el.querySelector('.expl').classList.toggle('show',!!(s.chosen!=null||s.rev));
+  if(rb){rb.style.display=s.chosen!=null?'none':'';rb.textContent=s.rev?'إخفاء الإجابة':'إظهار الإجابة';}
+ }
+ if(d.type==='calc'){
+  const f=el.querySelector('#cf'+i);
+  if(s.val!=null){const ok=d.ans.includes(normNum(s.val));f.textContent=ok?'✓ صح':'✗ حاول تاني';f.style.color=ok?'var(--green)':'var(--red)';}
+  el.querySelector('.expl').classList.toggle('show',!!(s.rev||s.ok));
+  if(rb)rb.textContent=s.rev?'إخفاء الإجابة':'إظهار الإجابة';
+ }
+ if(d.type==='essay'){el.querySelector('.expl').classList.toggle('show',!!s.rev);if(rb)rb.textContent=s.rev?'إخفاء الإجابة':'إظهار الإجابة';}
+ if(d.type==='rapid'){
+  el.querySelectorAll('.rp').forEach((r,k)=>{const it=d.items[k];const on=s.rev||(s.open&&s.open[k]);
+   r.classList.toggle('open',!!on);r.classList.toggle('t',!!on&&it.t);r.classList.toggle('f',!!on&&!it.t);
+   r.querySelector('.res').textContent=on?(it.t?'✓ صح':'✗ غلط'):'اضغط';});
+  if(rb)rb.textContent=s.rev?'إخفاء الكل':'إظهار الكل';
+ }
+}
+function choose(k){const d=S[cur];if(d.type!=='q')return;st[cur]=st[cur]||{};if(st[cur].chosen!=null)return;if(k>=d.opts.length)return;st[cur].chosen=k;applyState(cur);}
+function checkCalc(){const d=S[cur];if(d.type!=='calc')return;const inp=$('#in'+cur);if(!inp||!inp.value.trim())return;st[cur]=st[cur]||{};st[cur].val=inp.value;if(d.ans.includes(normNum(inp.value)))st[cur].ok=true;inp.blur();applyState(cur);}
+function toggleRp(r){st[cur]=st[cur]||{};st[cur].open=st[cur].open||{};const k=+r.dataset.k;st[cur].open[k]=!st[cur].open[k];applyState(cur);}
+function reveal(){const d=S[cur];st[cur]=st[cur]||{};st[cur].rev=!st[cur].rev;if(d.type==='rapid'&&!st[cur].rev)st[cur].open={};applyState(cur);}
+
+function go(i,dir){
+ i=Math.max(0,Math.min(S.length-1,i));
+ const prevEl=getEl(cur);
+ if(prevEl&&cur!==i){prevEl.classList.remove('on');prevEl.classList.toggle('back',i<cur);}
+ const el=ensure(i);el.classList.toggle('back',dir<0);el.scrollTop=0;
+ void el.offsetWidth;el.classList.add('on');el.classList.remove('back');
+ cur=i;
+ [...slidesEl.children].forEach(c=>{if(Math.abs(+c.dataset.i-cur)>3)c.remove()});
+ const d=S[i];
+ $('#chips').innerHTML=`<span class="chip">${SEC[d.sec].n}</span>`;
+ $('#count').textContent=`${i+1} / ${S.length}`;
+ $('#prog i').style.width=((i+1)/S.length*100)+'%';
+ $('#bPrev').disabled=i===0;$('#bNext').disabled=i===S.length-1;
+ try{history.replaceState(null,'','#'+(i+1))}catch(e){}
+}
+function next(){if(cur<S.length-1)go(cur+1,1)}
+function prev(){if(cur>0)go(cur-1,-1)}
+
+function buildOverview(){
+ const o=$('#overlay');let h='<button class="btn" id="ovx">إغلاق ✕</button><h2>فهرس الشرائح</h2>';let last='';
+ S.forEach((d,i)=>{if(d.sec!==last){if(last)h+='</div>';h+=`<div class="ov-sec">${SEC[d.sec].n}</div><div class="ov-grid">`;last=d.sec}
+  h+=`<div class="ov-item ${i===cur?'cur':''}" data-i="${i}"><span>${i+1}</span>${strip(d.title||d.q||d.tag).slice(0,70)}</div>`});
+ o.innerHTML=h+'</div>';
+ const c=o.querySelector('.cur');if(c)setTimeout(()=>c.scrollIntoView({block:'center'}),30);}
+function toggleOverview(){const o=$('#overlay');if(o.classList.toggle('on'))buildOverview();}
+$('#overlay').addEventListener('click',e=>{
+ if(e.target.closest('#ovx')){$('#overlay').classList.remove('on');return}
+ const it=e.target.closest('.ov-item');if(it){$('#overlay').classList.remove('on');go(+it.dataset.i,1)}});
+
+addEventListener('keydown',e=>{
+ if(e.target.tagName==='INPUT')return;
+ if(e.key==='Escape'){$('#overlay').classList.remove('on');return}
+ if(e.key==='ArrowLeft'){e.preventDefault();next()}
+ else if(e.key==='ArrowRight'){e.preventDefault();prev()}
+});
+
+/* swipe: finger moves right = next (RTL), left = previous */
+let tx=0,ty=0;
+slidesEl.addEventListener('touchstart',e=>{const t=e.touches[0];tx=t.clientX;ty=t.clientY},{passive:true});
+slidesEl.addEventListener('touchend',e=>{
+ if(e.target.closest('input'))return;
+ const t=e.changedTouches[0],dx=t.clientX-tx,dy=t.clientY-ty;
+ if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.6){dx>0?next():prev();}
+},{passive:true});
+
+$('#bPrev').onclick=prev;$('#bNext').onclick=next;$('#bOv').onclick=toggleOverview;
+
+S.forEach(d=>{delete d.note});
+const start=parseInt((location.hash||'').slice(1))||1;
+go(Math.min(S.length,Math.max(1,start))-1,1);
+return {go,next,prev,reveal,choose,get cur(){return cur},get total(){return S.length},st};
+})();
+</script>
+</body>
+</html>
